@@ -18,7 +18,7 @@ export const experience: Experience[] = [
     end: "Present",
     description: "I work on production websites and e-commerce systems for cannabis brands and dispensaries, with a focus on custom WordPress development, third-party integrations and technically complex requirements.",
     highlights: [
-      "Built a native Dispense API integration that replaced reverse-proxy-based dispensary menus across 5+ production sites",
+      "Built a native Dispense API integration that replaced reverse-proxy-based dispensary menus with native WordPress shopping experiences",
       "Built WordPress themes and integrations with the Dutchie Pro SDK",
       "Built custom store locator plugins using Hoodie and Weedmaps as external data sources",
       "Implemented Salesforce, WooCommerce, Authorize.net and Klaviyo integrations",
