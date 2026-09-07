@@ -1,0 +1,5 @@
+import type { CaseStudy } from "@/data/projects";
+
+export function CaseStudyPage({ caseStudy }: { caseStudy: CaseStudy }) {
+  return <article className="detail-page"><a href="/#work">← Selected work</a><p className="eyebrow case-study-meta">{caseStudy.metadata}</p><h1>{caseStudy.title}</h1><p className="case-study-intro">{caseStudy.intro}</p>{caseStudy.sections.map((section) => <section className="case-study-section" key={section.title}><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</section>)}{caseStudy.relatedPlatformExperience && <section className="case-study-section"><h2>Related platform experience</h2><p>{caseStudy.relatedPlatformExperience}</p></section>}{caseStudy.technologies && <section className="case-study-section"><h2>Technologies</h2><p>{caseStudy.technologies}</p></section>}{caseStudy.liveProject && <section className="case-study-section"><h2>Live project</h2><p><a href={caseStudy.liveProject.url} target="_blank" rel="noopener noreferrer">{caseStudy.liveProject.label}</a></p></section>}<p className="case-study-back"><a href="/#work">← Back to selected work</a></p></article>;
+}
