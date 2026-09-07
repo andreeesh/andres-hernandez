@@ -22,6 +22,7 @@ export const experience: Experience[] = [
       "Built WordPress themes and integrations with the Dutchie Pro SDK",
       "Built custom store locator plugins using Hoodie and Weedmaps as external data sources",
       "Implemented Salesforce, WooCommerce, Authorize.net and Klaviyo integrations",
+      "Troubleshoot critical issues on live WordPress sites, including production failures, compromised installations, malware cleanup and post-incident hardening.",
       "Worked on the interactive Hemp Beverage News cannabis beverage regulations map",
       "Built and maintained custom themes, plugins, Gutenberg/ACF functionality and multi-location WordPress platforms",
       "Worked with GitHub Actions and Cloudflare as part of deployment and delivery workflows",
