@@ -1,3 +1,8 @@
+import type { StaticImageData } from "next/image";
+import heCartridges from "@/app/assets/he-cartridges.png";
+import proGroLocator from "@/app/assets/pro-gro-locator.png";
+import hbnMap from "@/app/assets/hbn-map.png";
+
 export type CaseStudy = {
   metadata: string;
   title: string;
@@ -11,6 +16,12 @@ export type CaseStudy = {
 };
 
 export type Project = { slug: string; category: string; name: string; description: string; technologies?: string; url?: string; linkText?: string; caseStudy?: CaseStudy; caseStudySlug?: string; featured: boolean };
+
+export const caseStudyMedia: Record<string, { src: StaticImageData; alt: string; caption: string }> = {
+  "native-dispensary-menus": { src: heCartridges, alt: "Elevation Cannabis product menu showing product filters, cannabis products, pricing and add-to-cart controls", caption: "Elevation Cannabis — native dispensary menu experience" },
+  "cannabis-store-locators": { src: proGroLocator, alt: "ProGro Cannabis store locator showing location search, retailer results and an interactive map", caption: "ProGro Cannabis — store locator powered by external retail data" },
+  "hemp-beverage-regulations": { src: hbnMap, alt: "Hemp Beverage News interactive United States map showing hemp beverage regulation status by state", caption: "Hemp Beverage News — interactive US regulations map" },
+};
 
 export const projects: Project[] = [
   { slug: "elevation-cannabis", category: "Cannabis · E-commerce", name: "Elevation Cannabis", description: "WordPress/WooCommerce e-commerce experience for a dispensary, integrating cannabis menu infrastructure with age verification, loyalty and multi-location shopping flows.", technologies: "WordPress · WooCommerce · Cannabis commerce integrations", url: "https://high-elevation.com/", linkText: "Visit website", featured: true },
