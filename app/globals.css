@@ -79,9 +79,6 @@ address { display: flex; gap: 24px; font-style: normal; }
 .detail-page h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
 .case-study-meta { margin-top: 80px; }
 .case-study-intro { max-width: 62ch; margin: 0 0 80px; font-size: 1.2rem; }
-.case-study-media { width: min(1040px, calc(100vw - 40px)); margin: 0 0 80px 50%; transform: translateX(-50%); }
-.case-study-media img { display: block; width: 100%; height: auto; border: 1px solid var(--border); }
-.case-study-media figcaption { margin-top: 10px; color: var(--text-secondary); font-size: .9rem; }
 .case-study-section { border-top: 1px solid var(--border); padding: 40px 0 8px; }
 .case-study-section h2 { font-size: 1.35rem; letter-spacing: 0; margin-bottom: 18px; }
 .case-study-section p { max-width: 68ch; }
