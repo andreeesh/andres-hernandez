@@ -20,6 +20,8 @@ export const experience: Experience[] = [
     highlights: [
       "Built a native Dispense API integration that replaced reverse-proxy-based dispensary menus with native WordPress shopping experiences",
       "Built WordPress themes and integrations with the Dutchie Pro SDK",
+      "Built production pages and reusable sections for Prismic-based websites using HTML and CSS, and developed dynamic experiences backed by custom Cloudflare Workers exposing data and functionality to front-end components.",
+      "For Current Cannabis, built the dynamic Featured In experience and its supporting Cloudflare Worker, with article data reused across the homepage and About Us page.",
       "Built custom store locator plugins using Hoodie and Weedmaps as external data sources",
       "Implemented Salesforce, WooCommerce, Authorize.net and Klaviyo integrations",
       "Troubleshot critical issues on live WordPress sites, including production failures, compromised installations, malware cleanup and post-incident hardening.",
@@ -27,7 +29,7 @@ export const experience: Experience[] = [
       "Built and maintained custom themes, plugins, Gutenberg/ACF functionality and multi-location WordPress platforms",
       "Worked with GitHub Actions and Cloudflare as part of deployment and delivery workflows",
     ],
-    technologies: "WordPress · WooCommerce · PHP · JavaScript · Gutenberg · ACF · Dispense · Dutchie Pro · Hoodie · Weedmaps · Salesforce · Klaviyo · REST APIs · GitHub Actions · Cloudflare",
+    technologies: "WordPress · WooCommerce · PHP · JavaScript · Gutenberg · ACF · Prismic · Dispense · Dutchie Pro · Hoodie · Weedmaps · Salesforce · Klaviyo · REST APIs · Cloudflare · Cloudflare Workers · GitHub Actions",
   },
   {
     company: "Kadabra IT",
