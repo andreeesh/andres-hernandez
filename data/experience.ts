@@ -22,6 +22,7 @@ export const experience: Experience[] = [
       "Built WordPress themes and integrations with the Dutchie Pro SDK",
       "Built production pages and reusable sections for Prismic-based websites using HTML and CSS, and developed dynamic experiences backed by custom Cloudflare Workers exposing data and functionality to front-end components.",
       "For Current Cannabis, built the dynamic Featured In experience and its supporting Cloudflare Worker, with article data reused across the homepage and About Us page.",
+      "Led the technical handoff of CBD Pros USA from another agency, taking over the existing front-end and back-end repositories and building the cloud environment required to deploy and operate the platform across Vercel, DigitalOcean, Supabase, Contentful, Medusa, Authorize.net and Klaviyo.",
       "Built custom store locator plugins using Hoodie and Weedmaps as external data sources",
       "Implemented Salesforce, WooCommerce, Authorize.net and Klaviyo integrations",
       "Troubleshot critical issues on live WordPress sites, including production failures, compromised installations, malware cleanup and post-incident hardening.",
