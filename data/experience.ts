@@ -6,6 +6,7 @@ export type Experience = {
   end: string;
   description: string;
   highlights?: string[];
+  printHighlights?: string[];
   technologies?: string;
 };
 
@@ -29,6 +30,15 @@ export const experience: Experience[] = [
       "Worked on the interactive Hemp Beverage News cannabis beverage regulations map",
       "Built and maintained custom themes, plugins, Gutenberg/ACF functionality and multi-location WordPress platforms",
       "Worked with GitHub Actions and Cloudflare as part of deployment and delivery workflows",
+    ],
+    printHighlights: [
+      "Built a native Dispense API integration that replaced reverse-proxy-based dispensary menus with native WordPress shopping experiences",
+      "Built production pages and reusable sections for Prismic-based websites using HTML and CSS, plus dynamic experiences backed by Cloudflare Workers, including Current Cannabis's Featured In experience",
+      "Led the technical handoff of CBD Pros USA, taking over existing front-end and back-end repositories and building the cloud environment required to deploy and operate the platform across Vercel, DigitalOcean, Supabase, Contentful, Medusa, Authorize.net and Klaviyo",
+      "Built custom WordPress store locator plugins using Hoodie and Weedmaps as external data sources",
+      "Implemented Salesforce, WooCommerce, Authorize.net and Klaviyo integrations, and built WordPress themes and integrations with the Dutchie Pro SDK",
+      "Troubleshot critical issues on live WordPress sites, including production failures, compromised installations, malware cleanup and post-incident hardening",
+      "Built and maintained custom WordPress themes, plugins, Gutenberg/ACF functionality and multi-location WordPress platforms",
     ],
     technologies: "WordPress · WooCommerce · PHP · JavaScript · Gutenberg · ACF · Prismic · Dispense · Dutchie Pro · Hoodie · Weedmaps · Salesforce · Klaviyo · REST APIs · Cloudflare · Cloudflare Workers · GitHub Actions",
   },

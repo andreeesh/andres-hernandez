@@ -16,7 +16,7 @@ export const profile = {
   // Central production origin used by metadata, sitemap, robots, and JSON-LD.
   productionUrl: "https://andreshernandez.ar",
   summary:
-    "Senior Web Developer with 15+ years of experience building production websites, custom WordPress systems, e-commerce platforms and third-party integrations for international clients. For over two years, I've focused primarily on the US cannabis industry, working with dispensary commerce platforms, custom APIs and store locators.",
+    "Senior Web Developer with 15+ years of experience building and maintaining production websites, custom WordPress systems, e-commerce platforms and third-party integrations. Experienced working autonomously on high-traffic and legacy systems, including custom themes, plugins, PHP and performance optimization. For over two years, I've focused primarily on the US cannabis industry, building technology for brands and dispensaries.",
 } as const;
 
 export const navigation: Link[] = [
