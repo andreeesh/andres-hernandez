@@ -28,7 +28,7 @@ export const experience: Experience[] = [
       "Implemented Salesforce, WooCommerce, Authorize.net and Klaviyo integrations",
       "Troubleshot critical issues on live WordPress sites, including production failures, compromised installations, malware cleanup and post-incident hardening.",
       "Worked on the interactive Hemp Beverage News cannabis beverage regulations map",
-      "Built and maintained custom themes, plugins, Gutenberg/ACF functionality and multi-location WordPress platforms",
+      "Built and maintained custom WordPress themes and plugins using hooks, filters, custom post types, taxonomies, Gutenberg and ACF across multi-location production websites.",
       "Worked with GitHub Actions and Cloudflare as part of deployment and delivery workflows",
     ],
     printHighlights: [
@@ -38,7 +38,7 @@ export const experience: Experience[] = [
       "Built custom WordPress store locator plugins using Hoodie and Weedmaps as external data sources",
       "Implemented Salesforce, WooCommerce, Authorize.net and Klaviyo integrations, and built WordPress themes and integrations with the Dutchie Pro SDK",
       "Troubleshot critical issues on live WordPress sites, including production failures, compromised installations, malware cleanup and post-incident hardening",
-      "Built and maintained custom WordPress themes, plugins, Gutenberg/ACF functionality and multi-location WordPress platforms",
+      "Built and maintained custom WordPress themes and plugins using hooks, filters, custom post types, taxonomies, Gutenberg and ACF across multi-location production websites",
     ],
     technologies: "WordPress · WooCommerce · PHP · JavaScript · Gutenberg · ACF · Prismic · Dispense · Dutchie Pro · Hoodie · Weedmaps · Salesforce · Klaviyo · REST APIs · Cloudflare · Cloudflare Workers · GitHub Actions",
   },
