@@ -1,3 +1,5 @@
 "use client";
+import type { Locale } from "@/data/locales";
+import { ui } from "@/data/locales";
 
-export function PrintButton() { return <button type="button" className="print-button" onClick={() => window.print()}>Print / Save as PDF</button>; }
+export function PrintButton({ locale = "en" }: { locale?: Locale }) { return <button type="button" className="print-button" onClick={() => window.print()}>{ui[locale].print}</button>; }

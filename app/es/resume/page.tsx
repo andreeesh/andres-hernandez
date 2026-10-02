@@ -1,0 +1,12 @@
+import { Header } from "@/components/header";
+import { ExperienceEntry } from "@/components/experience-entry";
+import { PrintButton } from "@/components/print-button";
+import { experience, earlierExperience } from "@/data/experience";
+import { education, skillGroups } from "@/data/skills";
+import { profile } from "@/data/profile";
+import { createPageMetadata } from "@/data/seo";
+import { earlierExperienceEs, educationEs, experienceEs, profileEs, skillItemsEs, skillLeadEs, skillNamesEs } from "@/data/locales";
+
+export const metadata = createPageMetadata({ title: "CV", description: "Desarrollador web senior con más de 15 años de experiencia en WordPress, e-commerce, integraciones con APIs y tecnología para la industria del cannabis.", path: "/es/resume", locale: "es-AR", englishPath: "/resume" });
+
+export default function SpanishResume() { return <><a className="skip-link" href="#main-content">Ir al contenido</a><Header locale="es-AR" pagePath="/resume" /><main id="main-content" className="container resume"><div className="resume-top"><div><h1>{profile.name}</h1><p className="resume-title">{profileEs.title}</p><p className="resume-contact"><a href={profile.emailHref}>{profile.email}</a> · Córdoba, Argentina · <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></p></div><PrintButton locale="es-AR" /></div><section className="resume-section"><h2>Perfil profesional</h2><p>{profileEs.summary}</p></section><section className="resume-section"><h2>Experiencia</h2><div className="resume-experience">{experience.map((entry, i) => <ExperienceEntry entry={entry} localized={experienceEs[i]} locale="es-AR" key={entry.company} />)}<article className="experience-entry earlier-entry"><div className="entry-meta"><time>{earlierExperience.dates}</time><strong>{earlierExperienceEs.title}</strong><span>{earlierExperience.companies}</span></div><div className="entry-content"><p>{earlierExperienceEs.description}</p><p>{earlierExperienceEs.additional}</p></div></article></div></section><section className="resume-section"><h2>Habilidades técnicas destacadas</h2><div className="resume-skills">{skillGroups.map((group) => <p key={group.name}><strong>{skillNamesEs[group.name] ?? group.name}</strong><br />{skillLeadEs[group.name] ?? skillItemsEs[group.name] ?? group.items}</p>)}</div></section><section className="resume-section"><h2>Formación</h2><ul className="education-list">{educationEs.map((item) => <li key={item}>{item}</li>)}</ul></section></main></>; }

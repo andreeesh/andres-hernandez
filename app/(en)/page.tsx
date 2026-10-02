@@ -7,6 +7,9 @@ import { Skills } from "@/components/skills";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { profile } from "@/data/profile";
+import { createPageMetadata } from "@/data/seo";
+
+export const metadata = createPageMetadata({ title: "Andrés Hernández — Senior Web Developer | WordPress & Cannabis Technology", description: "Senior Web Developer with 15+ years of experience in WordPress, e-commerce, API integrations and cannabis technology, working remotely with US and international teams.", path: "/", englishPath: "/" });
 
 export default function Home() {
   const jsonLd = { "@context": "https://schema.org", "@type": "Person", name: profile.name, url: profile.productionUrl, jobTitle: profile.title, email: profile.emailHref, sameAs: [profile.linkedin], knowsAbout: ["WordPress", "WooCommerce", "PHP", "JavaScript", "TypeScript", "React", "E-commerce", "REST APIs", "Cannabis technology"] };
