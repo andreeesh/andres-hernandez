@@ -1,6 +1,6 @@
 import { Header } from "@/components/header";
 import { Intro } from "@/components/intro";
-import { CannabisExperience } from "@/components/cannabis-experience";
+import { EngineeringFocus } from "@/components/engineering-focus";
 import { ExperienceSection } from "@/components/experience";
 import { SelectedWork } from "@/components/selected-work";
 import { TechnicalWriting } from "@/components/technical-writing";
@@ -14,5 +14,5 @@ export const metadata = createPageMetadata({ title: "Andrés Hernández — Seni
 
 export default function Home() {
   const jsonLd = { "@context": "https://schema.org", "@type": "Person", name: profile.name, url: profile.productionUrl, jobTitle: profile.title, email: profile.emailHref, sameAs: [profile.linkedin], knowsAbout: ["Backend development", "PHP", "Node.js", "TypeScript", "REST APIs", "PostgreSQL", "Docker", "CI/CD", "Cloud infrastructure", "WordPress"] };
-  return <><a className="skip-link" href="#main-content">Skip to content</a><Header /><main id="main-content" className="container"><Intro /><CannabisExperience /><ExperienceSection /><SelectedWork /><TechnicalWriting /><Skills /><Contact /></main><Footer /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><Header /><main id="main-content" className="container"><Intro /><EngineeringFocus /><ExperienceSection /><SelectedWork /><TechnicalWriting /><Skills /><Contact /></main><Footer /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /></>;
 }
