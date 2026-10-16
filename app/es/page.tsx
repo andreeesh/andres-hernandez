@@ -10,7 +10,7 @@ import { Footer } from "@/components/footer";
 import { profile } from "@/data/profile";
 import { createPageMetadata } from "@/data/seo";
 
-export const metadata = createPageMetadata({ title: "Andrés Hernández — Ingeniero de Software Senior | Backend, Web e Infraestructura", description: "Ingeniero de software senior con más de 15 años de experiencia desarrollando sistemas en producción, backend, APIs, integraciones y plataformas web para equipos internacionales.", path: "/es", locale: "es-AR", englishPath: "/" });
+export const metadata = createPageMetadata({ title: "Andrés Hernández — Ingeniero de Software Senior | Backend e Infraestructura", description: "Ingeniero de software senior con más de 15 años de experiencia desarrollando sistemas en producción, backend, APIs, integraciones y plataformas web para equipos internacionales.", path: "/es", locale: "es-AR", englishPath: "/" });
 
 export default function SpanishHome() {
   const jsonLd = { "@context": "https://schema.org", "@type": "Person", name: profile.name, url: `${profile.productionUrl}/es`, jobTitle: "Ingeniero de Software Senior", email: profile.emailHref, sameAs: [profile.linkedin], knowsAbout: ["Backend", "PHP", "Node.js", "TypeScript", "REST APIs", "PostgreSQL", "Docker", "CI/CD", "Infraestructura cloud", "WordPress"] };

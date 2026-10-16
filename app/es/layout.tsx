@@ -5,7 +5,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "../globals.css";
 
 const font = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], display: "swap" });
-const title = "Andrés Hernández — Ingeniero de Software Senior | Backend, Web e Infraestructura";
+const title = "Andrés Hernández — Ingeniero de Software Senior | Backend e Infraestructura";
 const description = "Ingeniero de software senior con más de 15 años de experiencia desarrollando sistemas en producción, backend, APIs, integraciones y plataformas web para equipos internacionales.";
 
 export const metadata: Metadata = {

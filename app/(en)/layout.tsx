@@ -5,7 +5,7 @@ import { socialImage } from "@/data/seo";
 import "../globals.css";
 
 const font = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], display: "swap" });
-const title = "Andrés Hernández — Senior Software Engineer | Backend, Web & Infrastructure";
+const title = "Andrés Hernández — Senior Software Engineer | Backend & Infrastructure";
 const description = "Senior Software Engineer with 15+ years of experience building production systems, backend services, APIs, integrations and web platforms for international teams.";
 
 export const metadata: Metadata = {
