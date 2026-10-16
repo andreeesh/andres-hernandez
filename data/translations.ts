@@ -1,17 +1,7 @@
 import { projects } from "@/data/projects";
 
 export const homeEs = {
-  cannabisLabel: "Experiencia en cannabis",
-  cannabisTitle: "Desarrollo tecnología para la industria del cannabis desde adentro.",
-  cannabisIntro: "En PufCreativ llevo más de dos años trabajando en sitios en producción y sistemas de e-commerce para marcas y dispensarios de cannabis de Estados Unidos. Gran parte de ese trabajo consiste en conectar WordPress con las plataformas especializadas que usa la industria.",
-  capabilities: [
-    { title: "Menús nativos para dispensarios", copy: "Desarrollé una integración WordPress a medida con la API de Dispense para reemplazar menús de dispensario basados en reverse proxy por experiencias de compra nativas y alineadas con la marca. La implementación admite productos, carruseles, navegación y diseños configurables directamente en WordPress, y está pensada para reutilizarse en sitios en producción.", tech: "Dispense API · WordPress · WooCommerce · PHP · JavaScript" },
-    { title: "Dutchie Pro", copy: "Desarrollé temas e integraciones WordPress con Dutchie Pro SDK, incluida la colaboración directa con el equipo de ingeniería de Dutchie para resolver requisitos de implementación.", tech: "Dutchie Pro SDK · WordPress · PHP · JavaScript", liveLabel: "Ver The Fire Station" },
-    { title: "Buscadores de locales", copy: "Desarrollé integraciones WordPress a medida para buscar locales usando datos externos de comercios de cannabis. Una implementación usa Hoodie y otra utiliza Weedmaps Public API como fuente de datos.", tech: "Hoodie API · Weedmaps API · WordPress · REST APIs" },
-    { title: "Integraciones de comercio y CRM", copy: "Desarrollé y mantuve integraciones entre WordPress y WooCommerce y sistemas externos de negocio, como Salesforce, Authorize.net y Klaviyo.", tech: "Salesforce · WooCommerce · Authorize.net · Klaviyo · REST APIs" },
-    { title: "Datos regulatorios del cannabis", copy: "Trabajé en el mapa interactivo de regulaciones de Hemp Beverage News, que permite consultar las regulaciones sobre bebidas de cannabis y cáñamo en distintos estados de Estados Unidos.", liveLabel: "Ver mapa de regulaciones" },
-  ],
-  experienceLabel: "Experiencia", experienceTitle: "Más de 15 años desarrollando para la web.",
+  experienceLabel: "Experiencia", experienceTitle: "Más de 15 años desarrollando y operando software en producción.",
   workLabel: "Proyectos destacados", workTitle: "Sistemas, integraciones y plataformas que desarrollé.",
   skillsLabel: "Habilidades", skillsTitle: "Herramientas que uso para hacer el trabajo.",
   aiNote: "El desarrollo asistido por IA forma parte de mi trabajo diario de ingeniería para implementar, depurar, probar y revisar código. La uso como herramienta de ingeniería, sin dejar de entender los sistemas en los que trabajo.",
