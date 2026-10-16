@@ -26,7 +26,6 @@ export const profileEs = {
   eyebrow: "Ingeniero de Software Senior · Backend y Web · Córdoba, Argentina",
   headline: "Desarrollo y opero software en producción.",
   intro: "Soy ingeniero de software senior y tengo más de 15 años de experiencia desarrollando sistemas backend, aplicaciones web, APIs, integraciones e infraestructura de producción para equipos internacionales.",
-  cannabisIntro: "Mi experiencia más profunda está en PHP y WordPress, pero mi trabajo abarca Node.js, TypeScript, PostgreSQL, plataformas cloud, CI/CD y sistemas de terceros.",
   location: "Córdoba, Argentina · Remoto · Equipos de Estados Unidos e internacionales",
   summary: "Ingeniero de software senior con más de 15 años de experiencia desarrollando y manteniendo sistemas en producción para equipos internacionales. Fuerte experiencia en PHP y WordPress, con trabajo práctico en backend, APIs REST, bases de datos relacionales, Node.js, TypeScript, infraestructura cloud, CI/CD, e-commerce e integraciones con servicios de terceros. Acostumbrado a tomar sistemas desconocidos o heredados, resolver incidentes de producción y entregar software de punta a punta.",
 } as const;
@@ -63,11 +62,19 @@ export const earlierExperienceEs = { title: "Experiencia anterior", dates: "2010
 export const educationEs = ["Desarrollo Web — Image Campus, 2011", "Redes y servidores Linux — IT Education, 2015"] as const;
 
 export const skillNamesEs: Record<string, string> = {
-  "Performance & technical SEO": "Rendimiento y SEO técnico", "Cannabis & commerce": "Cannabis y e-commerce", "Web development": "Desarrollo web", "Infrastructure & workflow": "Infraestructura y flujos de trabajo",
+  "Backend & APIs": "Backend y APIs",
+  "Data": "Datos",
+  "Infrastructure & delivery": "Infraestructura y despliegue",
+  "WordPress & commerce": "WordPress y comercio",
+  "Frontend & web": "Frontend y web",
+  "Platforms & integrations": "Plataformas e integraciones",
 };
 
-export const skillLeadEs: Record<string, string> = { "WordPress": "WordPress", "Performance & technical SEO": "Optimización de rendimiento · Caché · Optimización de consultas · Optimización de recursos · SEO técnico · Marcado Schema · Sitemaps · Redirecciones · Canonicals", "Cannabis & commerce": "Dispense · Dutchie Pro SDK · Hoodie API · Weedmaps API · Medusa · WooCommerce · Salesforce · Klaviyo · Authorize.net", "Web development": "HTML5 · CSS3 · Flexbox · CSS Grid · Desarrollo adaptable · PHP · JavaScript · TypeScript · React · Next.js · Node.js · REST APIs · MySQL · PostgreSQL", Shopify: "Shopify · Liquid · Desarrollo de temas Shopify · E-commerce en producción", "Infrastructure & workflow": "Git · GitHub Actions · Docker · Cloudflare · Cloudflare Workers · Vercel · DigitalOcean · Supabase · Render · Codex · Claude Code · MCP · Flujos de desarrollo con agentes" };
-
-export const skillItemsEs: Record<string, string> = {
-  WordPress: "WordPress internals · Temas a medida · Child themes · Plugins a medida · Hooks y filters · Custom post types · Taxonomías · Gutenberg · ACF · WooCommerce · WP-CLI · WPML · Elementor · Headless WordPress · Migraciones · Resolución de problemas en producción · Limpieza de malware · Refuerzo de seguridad",
+export const skillLeadEs: Record<string, string> = {
+  "Backend & APIs": "PHP · Node.js · TypeScript · JavaScript · APIs REST · Webhooks · Autenticación · Integraciones con terceros · Procesos en segundo plano · Laravel · Yii",
+  "Data": "PostgreSQL · MySQL · Modelado relacional · Validación de datos · ETL · Pipelines de importación y exportación · Migraciones a gran escala · Supabase",
+  "Infrastructure & delivery": "Linux · Docker · Git · GitHub Actions · CI/CD · Cloudflare · Cloudflare Workers · Vercel · Render · DigitalOcean · Resolución de problemas en producción",
+  "WordPress & commerce": "Internals de WordPress · Temas a medida · Plugins a medida · WooCommerce · Gutenberg · ACF · WP-CLI · WordPress headless · Rendimiento · Hardening de seguridad · Migraciones en producción",
+  "Frontend & web": "React · Next.js · HTML5 · CSS3 · Desarrollo responsive · Prismic · Contentful · SEO técnico · Schema markup",
+  "Platforms & integrations": "Salesforce · Medusa · Authorize.net · Klaviyo · Dispense · Dutchie Pro SDK · Hoodie API · Weedmaps API · Shopify",
 };
