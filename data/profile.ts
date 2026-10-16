@@ -2,21 +2,20 @@ export type Link = { label: string; href: string; external?: boolean };
 
 export const profile = {
   name: "Andrés Hernández",
-  title: "Senior Web Developer",
-  eyebrow: "Senior Web Developer · Córdoba, Argentina",
-  headline: "I build WordPress, e-commerce and cannabis technology.",
+  title: "Senior Software Engineer",
+  eyebrow: "Senior Software Engineer · Backend & Web · Córdoba, Argentina",
+  headline: "I build and operate production software.",
   intro:
-    "I'm a senior web developer with 15+ years of experience building production websites, custom systems and complex integrations for international teams.",
+    "I'm a senior software engineer with 15+ years of experience building backend systems, web applications, APIs, integrations and production infrastructure for international teams.",
   cannabisIntro:
-    "For over two years, I've worked primarily with cannabis brands and dispensaries in the US, building custom e-commerce experiences, menu integrations, store locators and third-party integrations.",
+    "My strongest background is in PHP and WordPress, but my work extends across Node.js, TypeScript, PostgreSQL, cloud platforms, CI/CD and third-party systems. I focus on understanding the system, choosing the right pieces and taking responsibility for getting it into production.",
   location: "Córdoba, Argentina · Remote · US / international teams",
   email: "andreeesh@gmail.com",
   emailHref: "mailto:andreeesh@gmail.com",
   linkedin: "https://linkedin.com/in/andreeesh",
-  // Central production origin used by metadata, sitemap, robots, and JSON-LD.
   productionUrl: "https://andreshernandez.ar",
   summary:
-    "Senior Web Developer with 15+ years of experience building and maintaining production websites, custom WordPress systems, e-commerce platforms and third-party integrations. Experienced working autonomously on high-traffic and legacy systems, including custom themes, plugins, PHP and performance optimization. For over two years, I've focused primarily on the US cannabis industry, building technology for brands and dispensaries.",
+    "Senior Software Engineer with 15+ years of experience building and maintaining production systems for international teams. Strong background in PHP and WordPress, with hands-on work across backend development, REST APIs, relational databases, Node.js, TypeScript, cloud infrastructure, CI/CD, e-commerce and third-party integrations. Experienced taking ownership of unfamiliar and legacy systems, troubleshooting production incidents, designing integrations and delivering software across the full lifecycle.",
 } as const;
 
 export const navigation: Link[] = [
