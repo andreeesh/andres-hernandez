@@ -1,6 +1,6 @@
 import { Header } from "@/components/header";
 import { Intro } from "@/components/intro";
-import { CannabisExperience } from "@/components/cannabis-experience";
+import { EngineeringFocus } from "@/components/engineering-focus";
 import { ExperienceSection } from "@/components/experience";
 import { SelectedWork } from "@/components/selected-work";
 import { TechnicalWriting } from "@/components/technical-writing";
@@ -14,5 +14,5 @@ export const metadata = createPageMetadata({ title: "Andrés Hernández — Inge
 
 export default function SpanishHome() {
   const jsonLd = { "@context": "https://schema.org", "@type": "Person", name: profile.name, url: `${profile.productionUrl}/es`, jobTitle: "Ingeniero de Software Senior", email: profile.emailHref, sameAs: [profile.linkedin], knowsAbout: ["Backend", "PHP", "Node.js", "TypeScript", "REST APIs", "PostgreSQL", "Docker", "CI/CD", "Infraestructura cloud", "WordPress"] };
-  return <><a className="skip-link" href="#main-content">Ir al contenido</a><Header locale="es-AR" /><main id="main-content" className="container"><Intro locale="es-AR" /><CannabisExperience locale="es-AR" /><ExperienceSection locale="es-AR" /><SelectedWork locale="es-AR" /><TechnicalWriting locale="es-AR" /><Skills locale="es-AR" /><Contact locale="es-AR" /></main><Footer locale="es-AR" /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /></>;
+  return <><a className="skip-link" href="#main-content">Ir al contenido</a><Header locale="es-AR" /><main id="main-content" className="container"><Intro locale="es-AR" /><EngineeringFocus locale="es-AR" /><ExperienceSection locale="es-AR" /><SelectedWork locale="es-AR" /><TechnicalWriting locale="es-AR" /><Skills locale="es-AR" /><Contact locale="es-AR" /></main><Footer locale="es-AR" /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /></>;
 }

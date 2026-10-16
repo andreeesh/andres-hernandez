@@ -7,7 +7,7 @@ export const profile = {
   headline: "I build and operate production software.",
   intro:
     "I'm a senior software engineer with 15+ years of experience building backend systems, web applications, APIs, integrations and production infrastructure for international teams.",
-  cannabisIntro:
+  detail:
     "My strongest background is in PHP and WordPress, but my work extends across Node.js, TypeScript, PostgreSQL, cloud platforms, CI/CD and third-party systems. I focus on understanding the system, choosing the right pieces and taking responsibility for getting it into production.",
   location: "Córdoba, Argentina · Remote · US / international teams",
   email: "andreeesh@gmail.com",
