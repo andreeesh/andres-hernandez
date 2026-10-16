@@ -74,7 +74,7 @@ export const skillLeadEs: Record<string, string> = {
   "Backend & APIs": "PHP · Node.js · TypeScript · JavaScript · APIs REST · Webhooks · Autenticación · Integraciones con terceros · Procesos en segundo plano · Laravel · Yii",
   "Data": "PostgreSQL · MySQL · Modelado relacional · Validación de datos · ETL · Pipelines de importación y exportación · Migraciones a gran escala · Supabase",
   "Infrastructure & delivery": "Linux · Docker · Git · GitHub Actions · CI/CD · Cloudflare · Cloudflare Workers · Vercel · Render · DigitalOcean · Resolución de problemas en producción",
-  "WordPress & commerce": "Internals de WordPress · Temas a medida · Plugins a medida · WooCommerce · Gutenberg · ACF · WP-CLI · WordPress headless · Rendimiento · Hardening de seguridad · Migraciones en producción",
-  "Frontend & web": "React · Next.js · HTML5 · CSS3 · Desarrollo responsive · Prismic · Contentful · SEO técnico · Schema markup",
+  "WordPress & commerce": "Funcionamiento interno de WordPress · Temas a medida · Plugins a medida · WooCommerce · Gutenberg · ACF · WP-CLI · WordPress headless · Rendimiento · Refuerzo de seguridad · Migraciones en producción",
+  "Frontend & web": "React · Next.js · HTML5 · CSS3 · Desarrollo responsive · Prismic · Contentful · SEO técnico · Marcado Schema",
   "Platforms & integrations": "Salesforce · Medusa · Authorize.net · Klaviyo · Dispense · Dutchie Pro SDK · Hoodie API · Weedmaps API · Shopify",
 };
