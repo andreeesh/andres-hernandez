@@ -3,7 +3,7 @@ export type Link = { label: string; href: string; external?: boolean };
 export const profile = {
   name: "Andrés Hernández",
   title: "Senior Software Engineer",
-  eyebrow: "Senior Software Engineer · Backend & Web · Córdoba, Argentina",
+  eyebrow: "Senior Software Engineer · Backend & Infrastructure · Córdoba, Argentina",
   headline: "I build and operate production software.",
   intro:
     "I'm a senior software engineer with 15+ years of experience building backend systems, web applications, APIs, integrations and production infrastructure for international teams.",

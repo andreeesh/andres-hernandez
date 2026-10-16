@@ -23,7 +23,7 @@ export function languageLinks(pagePath: string, locale: Locale): string {
 
 export const profileEs = {
   title: "Ingeniero de Software Senior",
-  eyebrow: "Ingeniero de Software Senior · Backend y Web · Córdoba, Argentina",
+  eyebrow: "Ingeniero de Software Senior · Backend e infraestructura · Córdoba, Argentina",
   headline: "Desarrollo y opero software en producción.",
   intro: "Soy ingeniero de software senior y tengo más de 15 años de experiencia desarrollando sistemas backend, aplicaciones web, APIs, integraciones e infraestructura de producción para equipos internacionales.",
   location: "Córdoba, Argentina · Remoto · Equipos de Estados Unidos e internacionales",
