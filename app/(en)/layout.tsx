@@ -5,14 +5,16 @@ import { socialImage } from "@/data/seo";
 import "../globals.css";
 
 const font = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], display: "swap" });
+const title = "Andrés Hernández — Senior Software Engineer | Backend, Web & Infrastructure";
+const description = "Senior Software Engineer with 15+ years of experience building production systems, backend services, APIs, integrations and web platforms for international teams.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.productionUrl),
-  title: { default: "Andrés Hernández — Senior Web Developer | WordPress & Cannabis Technology", template: "%s — Andrés Hernández" },
-  description: "Senior Web Developer with 15+ years of experience in WordPress, e-commerce, API integrations and cannabis technology, working remotely with US and international teams.",
+  title: { default: title, template: "%s — Andrés Hernández" },
+  description,
   alternates: { canonical: "/", languages: { en: "/", "es-AR": "/es", "x-default": "/" } },
-  openGraph: { title: "Andrés Hernández — Senior Web Developer | WordPress & Cannabis Technology", description: "Senior Web Developer with 15+ years of experience in WordPress, e-commerce, API integrations and cannabis technology, working remotely with US and international teams.", type: "website", url: profile.productionUrl, locale: "en_US", alternateLocale: ["es_AR"], images: [{ ...socialImage, url: new URL(socialImage.url, profile.productionUrl).toString() }] },
-  twitter: { card: "summary", title: "Andrés Hernández — Senior Web Developer | WordPress & Cannabis Technology", description: "Senior Web Developer with 15+ years of experience in WordPress, e-commerce, API integrations and cannabis technology, working remotely with US and international teams.", images: [new URL(socialImage.url, profile.productionUrl).toString()] },
+  openGraph: { title, description, type: "website", url: profile.productionUrl, locale: "en_US", alternateLocale: ["es_AR"], images: [{ ...socialImage, url: new URL(socialImage.url, profile.productionUrl).toString() }] },
+  twitter: { card: "summary", title, description, images: [new URL(socialImage.url, profile.productionUrl).toString()] },
   robots: { index: true, follow: true },
 };
 

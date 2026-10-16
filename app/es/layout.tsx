@@ -5,9 +5,8 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "../globals.css";
 
 const font = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], display: "swap" });
-
-const title = "Andrés Hernández — Desarrollador web senior | WordPress y tecnología para cannabis";
-const description = "Desarrollador web senior con más de 15 años de experiencia en WordPress, e-commerce, integraciones con APIs y tecnología para la industria del cannabis. Trabajo de forma remota con equipos de Estados Unidos y de otros países.";
+const title = "Andrés Hernández — Ingeniero de Software Senior | Backend, Web e Infraestructura";
+const description = "Ingeniero de software senior con más de 15 años de experiencia desarrollando sistemas en producción, backend, APIs, integraciones y plataformas web para equipos internacionales.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.productionUrl),

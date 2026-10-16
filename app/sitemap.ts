@@ -8,8 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const en = path === "/" ? profile.productionUrl : `${profile.productionUrl}${path}`;
     const esPath = path === "/" ? "/es" : `/es${path}`;
     return [
-      { url: en, lastModified: new Date(), alternates: { languages: { en, "es-AR": `${profile.productionUrl}${esPath}`, "x-default": en } } },
-      { url: `${profile.productionUrl}${esPath}`, lastModified: new Date(), alternates: { languages: { en, "es-AR": `${profile.productionUrl}${esPath}`, "x-default": en } } },
+      { url: en, alternates: { languages: { en, "es-AR": `${profile.productionUrl}${esPath}`, "x-default": en } } },
+      { url: `${profile.productionUrl}${esPath}`, alternates: { languages: { en, "es-AR": `${profile.productionUrl}${esPath}`, "x-default": en } } },
     ];
   });
 }
