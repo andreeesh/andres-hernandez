@@ -199,7 +199,7 @@ try {
       ],
       relatedCaseStudyLabel: "Ver cómo encaja este patrón en la arquitectura de producción de Vienor",
     },
-  },,
+  },
   {
     slug: "multi-tenant-rbac-saas",
     publishedAt: "2026-10-16",
