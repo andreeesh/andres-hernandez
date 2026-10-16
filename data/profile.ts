@@ -21,6 +21,7 @@ export const profile = {
 export const navigation: Link[] = [
   { label: "Experience", href: "/#experience" },
   { label: "Work", href: "/#work" },
+  { label: "Articles", href: "/articles" },
   { label: "Skills", href: "/#skills" },
   { label: "Resume", href: "/resume" },
   { label: "Contact", href: "/#contact" },

@@ -3,13 +3,13 @@ export type Locale = "en" | "es-AR";
 export const ui = {
   en: {
     navigation: "Primary navigation", language: "Language",
-    navigationItems: { Experience: "Experience", Work: "Work", Skills: "Skills", Resume: "Resume", Contact: "Contact" },
+    navigationItems: { Experience: "Experience", Work: "Work", Articles: "Articles", Skills: "Skills", Resume: "Resume", Contact: "Contact" },
     skip: "Skip to content", print: "Print / Save as PDF", backWork: "← Selected work", back: "← Back to selected work",
     highlights: "Selected highlights", related: "Related platform experience", technologies: "Technologies", liveProject: "Live project", liveExample: "Live example",
   },
   "es-AR": {
     navigation: "Navegación principal", language: "Idioma",
-    navigationItems: { Experience: "Experiencia", Work: "Proyectos", Skills: "Habilidades", Resume: "CV", Contact: "Contacto" },
+    navigationItems: { Experience: "Experiencia", Work: "Proyectos", Articles: "Artículos", Skills: "Habilidades", Resume: "CV", Contact: "Contacto" },
     skip: "Ir al contenido", print: "Imprimir / Guardar como PDF", backWork: "← Proyectos destacados", back: "← Volver a proyectos destacados",
     highlights: "Aspectos destacados", related: "Experiencia relacionada con plataformas", technologies: "Tecnologías", liveProject: "Proyecto en línea", liveExample: "Ejemplo en línea",
   },

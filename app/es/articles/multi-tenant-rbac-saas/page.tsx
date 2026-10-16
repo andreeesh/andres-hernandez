@@ -19,5 +19,5 @@ export const metadata = createPageMetadata({
 
 export default function MultiTenantRbacArticleEs() {
   if (!article) notFound();
-  return <><a className="skip-link" href="#main-content">Saltar al contenido</a><Header pagePath={`/es/articles/${slug}`} /><main id="main-content" className="container"><TechnicalArticlePage article={article} locale="es" /></main><Footer /></>;
+  return <><a className="skip-link" href="#main-content">Saltar al contenido</a><Header pagePath={`/articles/${slug}`} /><main id="main-content" className="container"><TechnicalArticlePage article={article} locale="es" /></main><Footer /></>;
 }
