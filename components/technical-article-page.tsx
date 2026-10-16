@@ -28,7 +28,7 @@ export function TechnicalArticlePage({ article, locale = "en" }: { article: Tech
       {section.code && <pre style={{ overflowX: "auto", padding: "1rem", borderRadius: "0.5rem" }}><code>{section.code}</code></pre>}
     </section>)}
     <section className="case-study-section">
-      <h2>{locale === "es" ? "Caso de estudio relacionado" : "Related case study"}</h2>
+      <h2>{locale === "es" ? "Trabajo relacionado" : "Related work"}</h2>
       <p><a href={relatedHref}>{content.relatedCaseStudyLabel}</a></p>
     </section>
   </article>;
