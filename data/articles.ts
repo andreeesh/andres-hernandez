@@ -680,6 +680,222 @@ return persist(incoming);`,
       relatedCaseStudyLabel: "Ver cómo se usan estos controles de confiabilidad en el pipeline meteorológico de Vienor",
     },
   },
+  {
+    slug: "taking-ownership-unfamiliar-production-codebase",
+    publishedAt: "2026-10-16",
+    relatedCaseStudy: {
+      href: "/#cbd-pros-usa",
+      label: "CBD Pros USA — production platform handoff",
+    },
+    en: {
+      title: "Taking Ownership of an Unfamiliar Production Codebase",
+      description:
+        "A practical approach to taking over an existing production system: mapping architecture, restoring deployability, identifying risk, validating dependencies and earning confidence before making large changes.",
+      eyebrow: "Engineering · Production · Legacy Systems",
+      intro:
+        "Taking over an existing production system is different from starting a new project. The first job is not to improve the architecture. It is to understand what already exists well enough to operate it safely, recover deployability and make changes without breaking assumptions you have not discovered yet.",
+      dateLabel: "October 16, 2026",
+      sections: [
+        {
+          title: "The first deliverable is a system map",
+          paragraphs: [
+            "Before changing code, I want to know what actually makes the product run: repositories, runtime services, databases, CMS, queues, payment providers, DNS, storage, scheduled jobs, third-party APIs and deployment paths.",
+            "That map does not need to be perfect. It needs to be accurate enough to answer a basic question: if this component fails or changes, what else depends on it?",
+          ],
+          code: `browser
+  -> frontend
+  -> API
+  -> database
+
+API
+  -> CMS
+  -> commerce
+  -> payments
+  -> email / marketing
+
+deploy
+  -> hosting
+  -> environment variables
+  -> DNS`,
+        },
+        {
+          title: "Make the system deployable before making it elegant",
+          paragraphs: [
+            "A codebase that cannot be reproduced or deployed safely is already carrying operational risk. I prioritize getting the current version running in a known environment before attempting structural improvements.",
+            "That means identifying build commands, runtime versions, environment variables, external credentials, database connectivity and the actual production deployment path. The goal is to make the existing system observable and repeatable before changing its behavior.",
+          ],
+        },
+        {
+          title: "Separate facts from assumptions",
+          paragraphs: [
+            "Handoffs often include incomplete documentation and tribal knowledge. I treat every assumption as something to verify: which repository is authoritative, which environment is production, which service owns a database, whether a webhook is still active, or whether an integration is actually used.",
+            "Reading code is only one source of truth. Deployment configuration, DNS, logs, provider dashboards, database schemas and network behavior often reveal relationships that are missing from documentation.",
+          ],
+        },
+        {
+          title: "Trace one real request end to end",
+          paragraphs: [
+            "A useful way to learn an unfamiliar system is to pick one important user flow and follow it through every layer. For an e-commerce platform that might be product page to cart to checkout to payment confirmation to order persistence and customer notification.",
+            "This exposes boundaries quickly: where state lives, which service is authoritative, what runs synchronously, what depends on webhooks and where errors can leave the system partially updated.",
+          ],
+        },
+        {
+          title: "Find the irreversible operations",
+          paragraphs: [
+            "Not every part of a system has the same risk. Sending an email twice is annoying; charging a card twice is much worse. Deleting data, changing authentication, modifying production schemas and triggering external side effects deserve a higher level of caution.",
+            "I identify those operations early and look for idempotency, unique constraints, audit records, rollback paths and environment separation before touching the code around them.",
+          ],
+        },
+        {
+          title: "Restore observability before debugging from intuition",
+          paragraphs: [
+            "If a system is difficult to understand, adding more guesses makes it worse. Logs, request IDs, provider response metadata and clear error boundaries reduce the amount of reasoning that has to happen from incomplete evidence.",
+            "I want to know whether a failure comes from application code, infrastructure, a database, DNS or a third-party service. The faster those layers can be distinguished, the safer subsequent changes become.",
+          ],
+        },
+        {
+          title: "Change one boundary at a time",
+          paragraphs: [
+            "Large rewrites are especially dangerous during a handoff because the undocumented behavior is exactly what you do not know yet. I prefer small changes that isolate one boundary and produce evidence.",
+            "For example: first reproduce the frontend, then establish API connectivity, then validate the database, then reconnect the CMS, commerce, payments and marketing integrations. Each successful boundary reduces uncertainty for the next one.",
+          ],
+        },
+        {
+          title: "Infrastructure is part of the application",
+          paragraphs: [
+            "In one production handoff I received existing frontend and backend repositories and had to establish the environment required to operate them under a new team. That work crossed Vercel, DigitalOcean, Supabase, Contentful, Medusa, Authorize.net and Klaviyo.",
+            "The important lesson is that ownership did not stop at application code. DNS, hosting, environment configuration, data services, payment flows and external integrations were all part of the system that had to be understood and made operational.",
+          ],
+        },
+        {
+          title: "Document decisions while the context is fresh",
+          paragraphs: [
+            "The best time to improve documentation is while you are discovering the system. I record service ownership, deployment paths, required environment variables, integration purpose, known failure modes and decisions that would otherwise become tribal knowledge again.",
+            "Documentation should help the next person answer operational questions, not simply describe the directory structure.",
+          ],
+        },
+        {
+          title: "Earn the right to refactor",
+          paragraphs: [
+            "Once the system can be built, deployed, observed and recovered, architecture changes become much safer. At that point refactoring is based on evidence: recurring incidents, duplicated logic, fragile integrations or operational bottlenecks.",
+            "The goal of a handoff is not to prove that the previous architecture was wrong. It is to become responsible for the software quickly enough that improvements can be made without turning production into the test environment.",
+          ],
+        },
+        {
+          title: "The ownership mindset",
+          paragraphs: [
+            "Taking ownership means being able to explain how the system behaves, deploy it intentionally, diagnose failures across boundaries and make changes with a known blast radius.",
+            "That skill transfers across languages and frameworks. The code matters, but the deeper engineering work is reducing uncertainty until the system becomes something you can safely operate rather than something you are afraid to touch.",
+          ],
+        },
+      ],
+      relatedCaseStudyLabel: "See the production platform handoff work on CBD Pros USA",
+    },
+    es: {
+      title: "Cómo Hacerse Cargo de un Código de Producción Desconocido",
+      description:
+        "Un enfoque práctico para tomar control de un sistema existente en producción: mapear arquitectura, recuperar despliegues, identificar riesgo, validar dependencias y ganar confianza antes de hacer cambios grandes.",
+      eyebrow: "Ingeniería · Producción · Sistemas Legacy",
+      intro:
+        "Hacerse cargo de un sistema existente en producción es distinto de empezar un proyecto nuevo. El primer trabajo no es mejorar la arquitectura. Es entender lo que ya existe lo suficiente como para operarlo con seguridad, recuperar la capacidad de desplegar y hacer cambios sin romper supuestos que todavía no descubriste.",
+      dateLabel: "16 de octubre de 2026",
+      sections: [
+        {
+          title: "El primer entregable es un mapa del sistema",
+          paragraphs: [
+            "Antes de cambiar código quiero saber qué hace funcionar realmente al producto: repositorios, runtimes, bases de datos, CMS, colas, proveedores de pago, DNS, storage, jobs programados, APIs externas y caminos de despliegue.",
+            "Ese mapa no tiene que ser perfecto. Tiene que ser suficientemente preciso para responder una pregunta básica: si este componente falla o cambia, ¿qué más depende de él?",
+          ],
+          code: `browser
+  -> frontend
+  -> API
+  -> database
+
+API
+  -> CMS
+  -> commerce
+  -> payments
+  -> email / marketing
+
+deploy
+  -> hosting
+  -> environment variables
+  -> DNS`,
+        },
+        {
+          title: "Lograr que el sistema sea desplegable antes de hacerlo elegante",
+          paragraphs: [
+            "Un código que no puede reproducirse o desplegarse de forma segura ya tiene riesgo operativo. Priorizo lograr que la versión actual corra en un entorno conocido antes de intentar mejoras estructurales.",
+            "Eso implica identificar comandos de build, versiones de runtime, variables de entorno, credenciales externas, conectividad de base de datos y el camino real de despliegue a producción. El objetivo es volver observable y repetible al sistema existente antes de modificar su comportamiento.",
+          ],
+        },
+        {
+          title: "Separar hechos de supuestos",
+          paragraphs: [
+            "Los handoffs suelen venir con documentación incompleta y conocimiento informal. Trato cada supuesto como algo a verificar: qué repositorio es el autoritativo, cuál entorno es producción, qué servicio es dueño de la base, si un webhook sigue activo o si una integración realmente se usa.",
+            "Leer código es sólo una fuente de verdad. La configuración de despliegue, DNS, logs, paneles de proveedores, esquemas de base y comportamiento de red suelen mostrar relaciones que no aparecen en la documentación.",
+          ],
+        },
+        {
+          title: "Seguir un request real de punta a punta",
+          paragraphs: [
+            "Una forma útil de aprender un sistema desconocido es elegir un flujo importante y seguirlo a través de todas las capas. En una plataforma de e-commerce puede ser página de producto, carrito, checkout, confirmación de pago, persistencia de la orden y notificación al cliente.",
+            "Eso revela rápidamente los límites: dónde vive el estado, qué servicio es autoritativo, qué ocurre de forma síncrona, qué depende de webhooks y dónde un error puede dejar el sistema parcialmente actualizado.",
+          ],
+        },
+        {
+          title: "Encontrar las operaciones irreversibles",
+          paragraphs: [
+            "No todas las partes de un sistema tienen el mismo riesgo. Enviar un email dos veces es molesto; cobrar una tarjeta dos veces es mucho peor. Borrar datos, cambiar autenticación, modificar esquemas de producción y disparar efectos externos requieren más cuidado.",
+            "Identifico esas operaciones temprano y busco idempotencia, restricciones únicas, registros de auditoría, caminos de rollback y separación de ambientes antes de tocar el código que las rodea.",
+          ],
+        },
+        {
+          title: "Recuperar observabilidad antes de depurar por intuición",
+          paragraphs: [
+            "Si un sistema es difícil de entender, sumar más suposiciones lo empeora. Logs, request IDs, metadata de respuestas externas y límites claros de error reducen la cantidad de razonamiento que depende de evidencia incompleta.",
+            "Quiero poder distinguir si una falla viene del código, de infraestructura, de la base, de DNS o de un servicio externo. Cuanto más rápido se separan esas capas, más seguros son los cambios posteriores.",
+          ],
+        },
+        {
+          title: "Cambiar un límite por vez",
+          paragraphs: [
+            "Los rewrites grandes son especialmente peligrosos durante un handoff porque el comportamiento no documentado es justamente lo que todavía no conocés. Prefiero cambios pequeños que aíslen un límite y produzcan evidencia.",
+            "Por ejemplo: primero reproducir el frontend, luego establecer conectividad con la API, validar la base y después reconectar CMS, comercio, pagos e integraciones de marketing. Cada límite confirmado reduce la incertidumbre del siguiente.",
+          ],
+        },
+        {
+          title: "La infraestructura también es parte de la aplicación",
+          paragraphs: [
+            "En un handoff de producción recibí repositorios existentes de frontend y backend y tuve que establecer el entorno necesario para operarlos bajo un nuevo equipo. Ese trabajo atravesó Vercel, DigitalOcean, Supabase, Contentful, Medusa, Authorize.net y Klaviyo.",
+            "La lección importante es que hacerse cargo no terminó en el código. DNS, hosting, configuración de entorno, servicios de datos, flujos de pago e integraciones externas eran parte del sistema que había que entender y dejar operativo.",
+          ],
+        },
+        {
+          title: "Documentar decisiones mientras el contexto está fresco",
+          paragraphs: [
+            "El mejor momento para mejorar documentación es mientras estás descubriendo el sistema. Registro ownership de servicios, caminos de deploy, variables necesarias, propósito de cada integración, modos de falla conocidos y decisiones que de otro modo volverían a convertirse en conocimiento informal.",
+            "La documentación debería ayudar a la próxima persona a responder preguntas operativas, no solamente describir la estructura de carpetas.",
+          ],
+        },
+        {
+          title: "Ganarse el derecho a refactorizar",
+          paragraphs: [
+            "Cuando el sistema puede construirse, desplegarse, observarse y recuperarse, los cambios de arquitectura se vuelven mucho más seguros. Recién entonces el refactor se apoya en evidencia: incidentes repetidos, lógica duplicada, integraciones frágiles o cuellos de botella operativos.",
+            "El objetivo de un handoff no es demostrar que la arquitectura anterior estaba equivocada. Es hacerse responsable del software suficientemente rápido como para poder mejorarlo sin convertir producción en el ambiente de prueba.",
+          ],
+        },
+        {
+          title: "La mentalidad de ownership",
+          paragraphs: [
+            "Hacerse cargo significa poder explicar cómo se comporta el sistema, desplegarlo de forma intencional, diagnosticar fallas entre distintas capas y hacer cambios con un radio de impacto conocido.",
+            "Esa habilidad se transfiere entre lenguajes y frameworks. El código importa, pero el trabajo de ingeniería más profundo es reducir incertidumbre hasta que el sistema se convierte en algo que podés operar con seguridad y no en algo que da miedo tocar.",
+          ],
+        },
+      ],
+      relatedCaseStudyLabel: "Ver el trabajo de handoff de plataforma en CBD Pros USA",
+    },
+  },
 ];
 
 export const getTechnicalArticle = (slug: string): TechnicalArticle | undefined =>
