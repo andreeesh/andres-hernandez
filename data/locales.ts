@@ -22,13 +22,13 @@ export function languageLinks(pagePath: string, locale: Locale): string {
 }
 
 export const profileEs = {
-  title: "Desarrollador web senior",
-  eyebrow: "Desarrollador web senior · Córdoba, Argentina",
-  headline: "Desarrollo soluciones con WordPress, e-commerce y tecnología para la industria del cannabis.",
-  intro: "Soy desarrollador web senior y tengo más de 15 años de experiencia creando sitios en producción, sistemas a medida e integraciones complejas para equipos internacionales.",
-  cannabisIntro: "Desde hace más de dos años trabajo principalmente con marcas y dispensarios de cannabis de Estados Unidos. Desarrollo experiencias de e-commerce a medida, integraciones de menús, buscadores de locales e integraciones con servicios de terceros.",
+  title: "Ingeniero de Software Senior",
+  eyebrow: "Ingeniero de Software Senior · Backend y Web · Córdoba, Argentina",
+  headline: "Desarrollo y opero software en producción.",
+  intro: "Soy ingeniero de software senior y tengo más de 15 años de experiencia desarrollando sistemas backend, aplicaciones web, APIs, integraciones e infraestructura de producción para equipos internacionales.",
+  cannabisIntro: "Mi experiencia más profunda está en PHP y WordPress, pero mi trabajo abarca Node.js, TypeScript, PostgreSQL, plataformas cloud, CI/CD y sistemas de terceros.",
   location: "Córdoba, Argentina · Remoto · Equipos de Estados Unidos e internacionales",
-  summary: "Desarrollador web senior con más de 15 años de experiencia creando y manteniendo sitios en producción, sistemas WordPress a medida, plataformas de e-commerce e integraciones con servicios de terceros. Tengo experiencia trabajando con autonomía en sistemas de alto tráfico y plataformas heredadas, incluidos temas y plugins a medida, PHP y optimización de rendimiento. Desde hace más de dos años me enfoco principalmente en la industria del cannabis de Estados Unidos, donde desarrollo tecnología para marcas y dispensarios.",
+  summary: "Ingeniero de software senior con más de 15 años de experiencia desarrollando y manteniendo sistemas en producción para equipos internacionales. Fuerte experiencia en PHP y WordPress, con trabajo práctico en backend, APIs REST, bases de datos relacionales, Node.js, TypeScript, infraestructura cloud, CI/CD, e-commerce e integraciones con servicios de terceros. Acostumbrado a tomar sistemas desconocidos o heredados, resolver incidentes de producción y entregar software de punta a punta.",
 } as const;
 
 export const experienceEs = [
