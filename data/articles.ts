@@ -437,7 +437,7 @@ queryKey: ["analytics", tenantId]`,
       ],
       relatedCaseStudyLabel: "Ver el modelo de autorización multiempresa en el caso de estudio de Vienor",
     },
-  },,
+  },
   {
     slug: "reliable-third-party-api-pipelines",
     publishedAt: "2026-10-16",
