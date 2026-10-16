@@ -1,0 +1,17 @@
+import type { Locale } from "@/data/locales";
+
+export function EngineeringFocus({ locale = "en" }: { locale?: Locale }) {
+  const es = locale === "es-AR";
+  const capabilities = es ? [
+    { title: "Backend e integraciones", copy: "Diseño y desarrollo APIs, integraciones con servicios de terceros y lógica de backend para sistemas que necesitan convivir con plataformas externas y código existente.", tech: "PHP · Node.js · TypeScript · REST APIs · Webhooks" },
+    { title: "Datos y pipelines", copy: "Trabajo con bases de datos relacionales, procesos de importación y exportación, validación de datos y migraciones. En Specialized trabajé sobre un PIM empresarial con más de 200.000 productos.", tech: "PostgreSQL · MySQL · ETL · Data migrations" },
+    { title: "Infraestructura y producción", copy: "Me hago cargo del recorrido completo hasta producción: entornos cloud, despliegues, CI/CD, diagnóstico de incidentes y operación de sistemas existentes.", tech: "Docker · GitHub Actions · Cloudflare · Vercel · Render · DigitalOcean" },
+    { title: "Sistemas existentes", copy: "Gran parte de mi trabajo consiste en entrar a sistemas que no diseñé, entenderlos rápido y resolver problemas sin necesidad de reescribirlos. Incluye plataformas legacy, handoffs entre equipos e incidentes de producción.", tech: "Legacy systems · Troubleshooting · Platform handoffs · Security hardening" },
+  ] : [
+    { title: "Backend & integrations", copy: "I design and build APIs, third-party integrations and backend logic for systems that need to work with external platforms and existing codebases.", tech: "PHP · Node.js · TypeScript · REST APIs · Webhooks" },
+    { title: "Data & pipelines", copy: "I work with relational databases, import/export processes, data validation and migrations. At Specialized, I worked on an enterprise PIM containing more than 200,000 products.", tech: "PostgreSQL · MySQL · ETL · Data migrations" },
+    { title: "Infrastructure & production", copy: "I take ownership of the path to production: cloud environments, deployments, CI/CD, incident diagnosis and operating existing systems.", tech: "Docker · GitHub Actions · Cloudflare · Vercel · Render · DigitalOcean" },
+    { title: "Existing systems", copy: "A large part of my work is entering systems I didn't design, understanding them quickly and solving problems without requiring a rewrite. That includes legacy platforms, team handoffs and production incidents.", tech: "Legacy systems · Troubleshooting · Platform handoffs · Security hardening" },
+  ];
+  return <section id="engineering" className="section engineering-section" aria-labelledby="engineering-title"><div className="section-heading"><p className="section-label">{es ? "Enfoque de ingeniería" : "Engineering focus"}</p><h2 id="engineering-title">{es ? "Más que un stack específico." : "More than a specific stack."}</h2><p>{es ? "Las tecnologías cambian entre proyectos. Lo constante es el trabajo: entender sistemas, integrar piezas, resolver problemas de producción y entregar software mantenible." : "Technologies change between projects. The work stays consistent: understand systems, integrate pieces, solve production problems and deliver maintainable software."}</p></div><div className="capabilities">{capabilities.map(({ title, copy, tech }) => <article className="capability" key={title}><h3>{title}</h3><p>{copy}</p><p className="technology">{tech}</p></article>)}</div></section>;
+}
