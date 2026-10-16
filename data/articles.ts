@@ -200,6 +200,244 @@ try {
       relatedCaseStudyLabel: "Ver cómo encaja este patrón en la arquitectura de producción de Vienor",
     },
   },
+  {
+    slug: "multi-tenant-rbac-saas",
+    publishedAt: "2026-10-16",
+    relatedCaseStudy: {
+      href: "/work/vienor-saas-platform",
+      label: "Vienor — multi-tenant weather SaaS",
+    },
+    en: {
+      title: "Designing Multi-Tenant RBAC for a SaaS",
+      description:
+        "How to model users, memberships, roles, active tenant context and authorization boundaries in a multi-company SaaS without leaking data across tenants.",
+      eyebrow: "Backend · SaaS · Authorization",
+      intro:
+        "Multi-tenant authorization becomes much easier to reason about when identity, company membership, role and active tenant are treated as separate concepts. The mistake is usually not in the role names; it is in collapsing too many authorization decisions into the user record itself.",
+      dateLabel: "October 16, 2026",
+      sections: [
+        {
+          title: "Start by separating identity from membership",
+          paragraphs: [
+            "A user answers who someone is. A tenant membership answers which company that person belongs to and what they can do there. Keeping those concepts separate makes multi-company access possible without duplicating users or overloading a single user.role field.",
+            "In practice, that means a user can have one identity and many memberships. Each membership belongs to one tenant and carries the role and company-specific preferences that apply only in that context.",
+          ],
+          code: `User
+  id
+  email
+
+TenantMembership
+  userId
+  tenantId
+  role
+  notificationsEnabled
+
+UNIQUE(userId, tenantId)`,
+        },
+        {
+          title: "Roles belong to the tenant context",
+          paragraphs: [
+            "A role such as OWNER, ADMIN, AGRONOMIST, OPERATOR or VIEWER is meaningful only inside a company. The same person may be an owner in one tenant and a viewer in another.",
+            "That is why tenant-scoped roles should live on the membership, not on the user. A global role can still exist for platform-level concerns such as SUPERADMIN, but it should not be used as a shortcut for ordinary tenant authorization.",
+          ],
+        },
+        {
+          title: "Resolve the active tenant explicitly",
+          paragraphs: [
+            "Every tenant-scoped request needs an active tenant. The backend should resolve it from a trusted session context and then verify that the user still has a valid membership for that tenant.",
+            "A useful fallback order is: requested tenant if the membership is valid, then the user's default company if still valid, then another valid membership. If no valid membership exists, the session should enter a no-tenant or onboarding state instead of silently reusing stale tenant data.",
+          ],
+          code: `requested tenant
+  ↓ valid membership?
+default tenant
+  ↓ valid membership?
+first valid membership
+  ↓
+NO_TENANT / onboarding`,
+        },
+        {
+          title: "Put tenant context in the session, not in every client request",
+          paragraphs: [
+            "Once the active tenant is resolved, the server can issue a session or token carrying tenantId and the tenant-specific memberRole alongside any global platform role.",
+            "The client may request a tenant switch, but it should not be trusted to declare arbitrary tenant ownership on every API call. Authorization still comes from the server-side membership lookup and the session derived from it.",
+          ],
+        },
+        {
+          title: "Use capabilities instead of scattering role checks",
+          paragraphs: [
+            "Direct checks such as if role === ADMIN quickly spread through controllers and become difficult to reason about. A capability matrix gives the application one place to define what each tenant role may do.",
+            "Controllers can then protect operations such as fields.write, team.invite, billing.manage or analytics.view without duplicating role semantics. This also makes exceptions explicit: for example, an ADMIN may manage fields and users but not billing, while an OWNER can manage both.",
+          ],
+          code: `OWNER  -> fields.*, team.*, billing.manage
+ADMIN  -> fields.*, team.*, billing.view
+AGRONOMIST -> fields.read, alerts.*, analytics.*
+OPERATOR -> fields.read, notes.write
+VIEWER -> *.read`,
+        },
+        {
+          title: "Enforce both membership and capability",
+          paragraphs: [
+            "Authorization needs two checks: does the user belong to this tenant, and does the role for that membership allow the requested action? A capability check without tenant validation can authorize the right action in the wrong company.",
+            "I prefer centralized guards for tenant membership and member role or capability evaluation. That keeps controllers focused on application behavior while the authorization boundary stays consistent across fields, alerts, analytics, notifications, team management and billing.",
+          ],
+        },
+        {
+          title: "Tenant switching is also a frontend state problem",
+          paragraphs: [
+            "Changing the active company is not complete when the backend returns a new tenantId. The client may still contain cached queries, selected filters, open forms or in-flight requests from the previous company.",
+            "When the tenant changes, tenant-scoped requests should be cancelled, caches invalidated or keyed by tenantId, and tenant-specific UI state reset. Otherwise a correct backend can still be paired with a frontend that briefly renders stale data from another tenant.",
+          ],
+          code: `queryKey: ["fields", tenantId]
+queryKey: ["alerts", tenantId]
+queryKey: ["analytics", tenantId]`,
+        },
+        {
+          title: "Invitations must create membership, not alternate identity",
+          paragraphs: [
+            "Inviting someone to a company should converge on the same membership model whether the email already belongs to an existing user or to someone who still needs to register.",
+            "For an existing verified user, accepting the invitation can create the membership directly. For a new user, registration and email verification happen first, then the invitation creates the tenant membership. The invitation is temporary; the membership is the durable authorization record.",
+          ],
+        },
+        {
+          title: "Removal and role changes must take effect immediately",
+          paragraphs: [
+            "Membership is dynamic. A user can be removed from a company or have a role downgraded while still holding an old session or an open browser tab.",
+            "Sensitive requests should therefore validate the current membership rather than trusting a long-lived client view of the role. The frontend should also refresh company and user context after team mutations so navigation and permissions do not remain stale.",
+          ],
+        },
+        {
+          title: "No-tenant onboarding is a valid application state",
+          paragraphs: [
+            "A SaaS often needs to support a logged-in user who does not yet belong to a company. Treating this as an authentication failure makes onboarding awkward and encourages special cases.",
+            "A better design keeps the user authenticated but marks the session as having no active tenant. Only onboarding and company-creation routes are available until a tenant exists, after which the new membership becomes the active context.",
+          ],
+        },
+        {
+          title: "The boundary to protect",
+          paragraphs: [
+            "The most important rule in multi-tenant RBAC is that every tenant-scoped read and write must derive its tenant from trusted authorization context. Filtering by tenantId is not merely a query concern; it is part of the security boundary.",
+            "A good model makes the correct path easier than the dangerous one: membership is explicit, roles are contextual, capabilities are centralized, sessions carry resolved tenant context and client caches are tenant-aware. The result is easier to extend and much harder to misuse accidentally.",
+          ],
+        },
+      ],
+      relatedCaseStudyLabel: "See the multi-company authorization model in the Vienor case study",
+    },
+    es: {
+      title: "Diseño de RBAC Multiempresa para un SaaS",
+      description:
+        "Cómo modelar usuarios, membresías, roles, tenant activo y límites de autorización en un SaaS multiempresa sin filtrar datos entre empresas.",
+      eyebrow: "Backend · SaaS · Autorización",
+      intro:
+        "La autorización multiempresa se vuelve mucho más clara cuando identidad, membresía, rol y tenant activo se tratan como conceptos separados. El problema normalmente no está en los nombres de los roles, sino en concentrar demasiadas decisiones de autorización dentro del registro de usuario.",
+      dateLabel: "16 de octubre de 2026",
+      sections: [
+        {
+          title: "Separar identidad de membresía",
+          paragraphs: [
+            "Un usuario responde quién es una persona. Una membresía responde a qué empresa pertenece y qué puede hacer allí. Mantener esos conceptos separados permite que una misma identidad participe en varias empresas sin duplicar usuarios ni sobrecargar un único user.role.",
+            "En la práctica, un usuario puede tener una identidad y varias membresías. Cada membresía pertenece a un tenant y contiene el rol y las preferencias específicas de esa empresa.",
+          ],
+          code: `User
+  id
+  email
+
+TenantMembership
+  userId
+  tenantId
+  role
+  notificationsEnabled
+
+UNIQUE(userId, tenantId)`,
+        },
+        {
+          title: "Los roles pertenecen al contexto de la empresa",
+          paragraphs: [
+            "Un rol como OWNER, ADMIN, AGRONOMO, OPERADOR o VIEWER sólo tiene sentido dentro de una empresa. La misma persona puede ser propietaria en un tenant y visualizadora en otro.",
+            "Por eso los roles de empresa deben vivir en la membresía y no en el usuario. Puede existir un rol global para funciones de plataforma como SUPERADMIN, pero no debería usarse como atajo para la autorización normal de cada tenant.",
+          ],
+        },
+        {
+          title: "Resolver el tenant activo de forma explícita",
+          paragraphs: [
+            "Cada request asociado a una empresa necesita un tenant activo. El backend debe resolverlo desde un contexto de sesión confiable y verificar que el usuario todavía tenga una membresía válida para ese tenant.",
+            "Un orden de fallback útil es: tenant solicitado si la membresía es válida, luego la empresa por defecto si sigue siendo válida y finalmente otra membresía vigente. Si no existe ninguna, la sesión debe quedar en estado sin tenant u onboarding en lugar de reutilizar silenciosamente contexto viejo.",
+          ],
+          code: `tenant solicitado
+  ↓ ¿membresía válida?
+tenant por defecto
+  ↓ ¿membresía válida?
+primera membresía válida
+  ↓
+NO_TENANT / onboarding`,
+        },
+        {
+          title: "Guardar el contexto de tenant en la sesión",
+          paragraphs: [
+            "Una vez resuelto el tenant activo, el servidor puede emitir una sesión o token con tenantId y memberRole junto con cualquier rol global de plataforma.",
+            "El cliente puede pedir un cambio de empresa, pero no debería ser confiable para declarar libremente el tenant en cada llamada. La autorización sigue derivando de la membresía validada por el backend y de la sesión generada a partir de ella.",
+          ],
+        },
+        {
+          title: "Usar capacidades en lugar de repartir checks de roles",
+          paragraphs: [
+            "Condiciones directas como if role === ADMIN se multiplican rápido por los controladores y vuelven difícil entender la política completa. Una matriz de capacidades permite definir en un único lugar qué puede hacer cada rol.",
+            "Los controladores pueden proteger operaciones como fields.write, team.invite, billing.manage o analytics.view sin duplicar la semántica de roles. También permite expresar excepciones: por ejemplo, un ADMIN puede gestionar campos y equipo pero no facturación, mientras que un OWNER puede hacer ambas cosas.",
+          ],
+          code: `OWNER  -> fields.*, team.*, billing.manage
+ADMIN  -> fields.*, team.*, billing.view
+AGRONOMO -> fields.read, alerts.*, analytics.*
+OPERADOR -> fields.read, notes.write
+VIEWER -> *.read`,
+        },
+        {
+          title: "Validar membresía y capacidad",
+          paragraphs: [
+            "La autorización necesita dos comprobaciones: si el usuario pertenece al tenant y si el rol de esa membresía permite la acción solicitada. Validar sólo la capacidad puede autorizar la acción correcta dentro de la empresa equivocada.",
+            "Prefiero guardias centralizados para membresía y evaluación de rol o capacidades. Así los controladores se concentran en el comportamiento de la aplicación mientras el límite de autorización permanece consistente en campos, alertas, analítica, notificaciones, equipo y facturación.",
+          ],
+        },
+        {
+          title: "Cambiar de empresa también es un problema de estado del frontend",
+          paragraphs: [
+            "El cambio de tenant no termina cuando el backend devuelve un nuevo tenantId. El cliente todavía puede tener queries cacheadas, filtros seleccionados, formularios abiertos o requests en vuelo de la empresa anterior.",
+            "Al cambiar de empresa hay que cancelar requests tenant-scoped, invalidar caches o incluir tenantId en sus keys y resetear el estado específico de empresa. De lo contrario, un backend correcto puede convivir con un frontend que durante un momento muestre datos viejos de otro tenant.",
+          ],
+          code: `queryKey: ["fields", tenantId]
+queryKey: ["alerts", tenantId]
+queryKey: ["analytics", tenantId]`,
+        },
+        {
+          title: "Las invitaciones deben crear membresía, no otra identidad",
+          paragraphs: [
+            "Invitar a alguien a una empresa debería converger al mismo modelo de membresía tanto si el email ya pertenece a un usuario como si esa persona todavía necesita registrarse.",
+            "Para un usuario existente y verificado, aceptar la invitación puede crear directamente la membresía. Para uno nuevo, primero ocurren registro y verificación, y luego la invitación crea la membresía. La invitación es temporal; la membresía es el registro durable de autorización.",
+          ],
+        },
+        {
+          title: "Los cambios de rol y bajas deben aplicarse inmediatamente",
+          paragraphs: [
+            "La membresía es dinámica. Un usuario puede ser eliminado de una empresa o perder permisos mientras todavía conserva una sesión vieja o una pestaña abierta.",
+            "Los requests sensibles deberían validar la membresía actual en lugar de confiar en una vista antigua del rol. El frontend también debe refrescar el contexto de empresas y usuario después de modificar el equipo para que navegación y permisos no queden desactualizados.",
+          ],
+        },
+        {
+          title: "El onboarding sin tenant es un estado válido",
+          paragraphs: [
+            "Un SaaS puede tener un usuario autenticado que todavía no pertenece a ninguna empresa. Tratarlo como un error de autenticación vuelve incómodo el onboarding y genera excepciones por todos lados.",
+            "Un diseño más limpio mantiene al usuario autenticado pero sin tenant activo. Sólo se habilitan onboarding y creación de empresa hasta que exista un tenant; entonces la nueva membresía pasa a ser el contexto activo.",
+          ],
+        },
+        {
+          title: "El límite que hay que proteger",
+          paragraphs: [
+            "La regla más importante de un RBAC multiempresa es que toda lectura y escritura tenant-scoped derive su tenant de un contexto de autorización confiable. Filtrar por tenantId no es sólo un detalle de consulta; forma parte del límite de seguridad.",
+            "Un buen modelo hace que el camino correcto sea más fácil que el peligroso: membresías explícitas, roles contextuales, capacidades centralizadas, sesiones con tenant resuelto y caches conscientes del tenant. El resultado es más simple de extender y mucho más difícil de usar mal por accidente.",
+          ],
+        },
+      ],
+      relatedCaseStudyLabel: "Ver el modelo de autorización multiempresa en el caso de estudio de Vienor",
+    },
+  },
 ];
 
 export const getTechnicalArticle = (slug: string): TechnicalArticle | undefined =>
