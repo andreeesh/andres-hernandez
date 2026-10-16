@@ -1,10 +1,10 @@
 export const skillGroups = [
-  { name: "WordPress", items: "WordPress internals · Custom themes · Child themes · Custom plugins · Hooks & filters · Custom post types · Taxonomies · Gutenberg · ACF · WooCommerce · WP-CLI · WPML · Elementor · Headless WordPress · Migrations · Production troubleshooting · Malware cleanup · Security hardening" },
-  { name: "Performance & technical SEO", items: "Performance optimization · Caching · Query optimization · Asset optimization · Technical SEO · Schema markup · Sitemaps · Redirects · Canonicals" },
-  { name: "Cannabis & commerce", items: "Dispense · Dutchie Pro SDK · Hoodie API · Weedmaps API · Medusa · WooCommerce · Salesforce · Klaviyo · Authorize.net" },
-  { name: "Web development", items: "HTML5 · CSS3 · Flexbox · CSS Grid · Responsive development · PHP · JavaScript · TypeScript · React · Next.js · Node.js · REST APIs · MySQL · PostgreSQL" },
-  { name: "Shopify", items: "Shopify · Liquid · Shopify theme development · Production e-commerce work" },
-  { name: "Infrastructure & workflow", items: "Git · GitHub Actions · Docker · Cloudflare · Cloudflare Workers · Vercel · DigitalOcean · Supabase · Render · Codex · Claude Code · MCP · Agentic development workflows" },
+  { name: "Backend & APIs", items: "PHP · Node.js · TypeScript · JavaScript · REST APIs · Webhooks · Authentication · Third-party integrations · Background processing · Laravel · Yii" },
+  { name: "Data", items: "PostgreSQL · MySQL · Relational data modeling · Data validation · ETL · Import/export pipelines · Large-scale migrations · Supabase" },
+  { name: "Infrastructure & delivery", items: "Linux · Docker · Git · GitHub Actions · CI/CD · Cloudflare · Cloudflare Workers · Vercel · Render · DigitalOcean · Production troubleshooting" },
+  { name: "WordPress & commerce", items: "WordPress internals · Custom themes · Custom plugins · WooCommerce · Gutenberg · ACF · WP-CLI · Headless WordPress · Performance · Security hardening · Production migrations" },
+  { name: "Frontend & web", items: "React · Next.js · HTML5 · CSS3 · Responsive development · Prismic · Contentful · Technical SEO · Schema markup" },
+  { name: "Platforms & integrations", items: "Salesforce · Medusa · Authorize.net · Klaviyo · Dispense · Dutchie Pro SDK · Hoodie API · Weedmaps API · Shopify" },
 ] as const;
 
 export const education = ["Web Development — Image Campus, 2011", "Linux Networking and Servers — IT Education, 2015"] as const;
