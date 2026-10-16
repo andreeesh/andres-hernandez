@@ -11,6 +11,6 @@ export function Intro({ locale = "en" }: { locale?: Locale }) {
     : profile.intro;
   const detail = es
     ? "Mi experiencia más profunda está en PHP y WordPress, pero mi trabajo abarca Node.js, TypeScript, PostgreSQL, plataformas cloud, CI/CD y sistemas de terceros. Me enfoco en entender el sistema, elegir las piezas adecuadas y hacerme cargo de llevarlo a producción."
-    : profile.cannabisIntro;
+    : profile.detail;
   return <section className="hero" aria-labelledby="page-title"><p className="eyebrow">{title}</p><h1 id="page-title">{headline}</h1><div className="hero-copy"><p>{intro}</p><p>{detail}</p></div><p className="location">{es ? profileEs.location : profile.location}</p><p className="link-row"><a href={profile.emailHref}>{es ? "Correo" : "Email"}</a><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></p></section>;
 }
