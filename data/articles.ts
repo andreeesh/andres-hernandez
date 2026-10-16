@@ -438,6 +438,248 @@ queryKey: ["analytics", tenantId]`,
       relatedCaseStudyLabel: "Ver el modelo de autorización multiempresa en el caso de estudio de Vienor",
     },
   },
+  {
+    slug: "reliable-third-party-api-pipelines",
+    publishedAt: "2026-10-16",
+    relatedCaseStudy: {
+      href: "/work/vienor-saas-platform",
+      label: "Vienor — multi-tenant weather SaaS",
+    },
+    en: {
+      title: "Building Reliable Pipelines Around Third-Party APIs",
+      description:
+        "How to design resilient third-party API pipelines with timeouts, retries, freshness policies, circuit breakers, deduplication, fallbacks and idempotent persistence.",
+      eyebrow: "Backend · APIs · Reliability",
+      intro:
+        "Third-party APIs are part of your system whether you control them or not. They can slow down, rate-limit, return stale data or fail completely. A reliable integration is not just an HTTP request that succeeds most of the time; it is a boundary that absorbs external failure without letting it spread through the rest of the application.",
+      dateLabel: "October 16, 2026",
+      sections: [
+        {
+          title: "Treat the provider as an unreliable dependency",
+          paragraphs: [
+            "The first useful assumption is that every external API will eventually fail in a way your happy-path code did not expect. That does not mean the provider is bad. Networks fail, quotas are exhausted, maintenance happens and response times change.",
+            "The integration boundary should therefore define what happens when the provider is slow, unavailable, partially wrong or temporarily rate-limited. Reliability starts when those cases are explicit instead of being handled as generic exceptions.",
+          ],
+        },
+        {
+          title: "Separate provider adapters from application behavior",
+          paragraphs: [
+            "Application code should not need to know the response shape, authentication quirks or error vocabulary of every upstream service. I prefer a provider adapter that translates each external API into an internal contract.",
+            "That makes it possible to change providers, combine multiple sources or disable one temporarily without rewriting the rest of the application. Forecast evaluation, alerts and persistence can consume one normalized model while provider-specific behavior stays at the boundary.",
+          ],
+          code: `interface WeatherProvider {
+  getForecast(input: ForecastRequest): Promise<NormalizedForecast>;
+}`,
+        },
+        {
+          title: "Use timeouts before retries",
+          paragraphs: [
+            "A request that never fails but takes too long can be more damaging than a fast error. Every external call should have a bounded amount of time in which it is allowed to consume a worker or scheduled-job slot.",
+            "Retries only make sense after the first attempt has a clear timeout. Otherwise multiple slow calls can overlap and amplify the original problem.",
+          ],
+          code: `const controller = new AbortController();
+const timeout = setTimeout(() => controller.abort(), 8_000);
+
+try {
+  return await fetch(url, { signal: controller.signal });
+} finally {
+  clearTimeout(timeout);
+}`,
+        },
+        {
+          title: "Retry only failures that can improve with time",
+          paragraphs: [
+            "Not every error deserves a retry. A temporary network failure or a 5xx response may succeed on a later attempt. Invalid credentials, malformed input or a hard quota limit usually will not.",
+            "Retries should be bounded and delayed, preferably with exponential backoff and jitter so multiple instances do not retry at exactly the same time. The goal is recovery, not persistence at any cost.",
+          ],
+          code: `delay = min(base * 2 ** attempt + jitter, maxDelay)`,
+        },
+        {
+          title: "Circuit breakers stop repeated failure",
+          paragraphs: [
+            "When a provider is already failing or rate-limiting, repeatedly calling it on every scheduled run creates more load and wastes capacity. A circuit breaker records that recent failures have crossed a threshold and temporarily stops new attempts.",
+            "The open period should reflect the failure. A short cooldown can be enough for transient 429 responses, while an explicit daily quota error may justify staying open much longer. After the cooldown, a limited probe can decide whether normal traffic should resume.",
+          ],
+          code: `CLOSED -> failures exceed threshold -> OPEN
+OPEN -> cooldown expires -> HALF_OPEN
+HALF_OPEN -> success -> CLOSED
+HALF_OPEN -> failure -> OPEN`,
+        },
+        {
+          title: "Freshness can be more valuable than a new request",
+          paragraphs: [
+            "A reliable pipeline should know how old its existing data is before calling an upstream service again. If a forecast is still fresh enough for the product behavior, reusing it may be better than making another external request.",
+            "Freshness is a business decision, not only a cache TTL. Different consumers may tolerate different ages: an interactive forecast, an alert evaluation and a daily summary can each have their own acceptable window.",
+          ],
+        },
+        {
+          title: "Reuse one provider response across multiple consumers",
+          paragraphs: [
+            "Duplicate upstream calls often appear because different parts of the application independently ask for the same data. A scheduled forecast refresh may fetch data, then an alert process or comparison job fetches the same provider again minutes later.",
+            "Where possible, fetch once, normalize once and persist or share the result so forecasts, comparisons, alerts and summaries can reuse it. This reduces quota usage and also makes those features reason about the same snapshot.",
+          ],
+        },
+        {
+          title: "Make persistence idempotent",
+          paragraphs: [
+            "Retries and duplicate invocations are unavoidable at some layer, so writing the same result twice should be safe. Idempotency can be enforced with unique keys, upserts, deduplication tokens or by comparing the new normalized snapshot with the current one before writing.",
+            "In data pipelines I prefer not to create a new event or snapshot when nothing meaningful changed. That reduces database growth and makes downstream activity easier to interpret.",
+          ],
+          code: `if (sameMeaningfulData(previous, incoming)) {
+  return previous;
+}
+
+return persist(incoming);`,
+        },
+        {
+          title: "Fallbacks need explicit semantics",
+          paragraphs: [
+            "Multiple providers can improve availability, but only if the system knows what a fallback means. Provider B may have a different resolution, update cadence or field set from Provider A.",
+            "Normalize what can be normalized, preserve source metadata and avoid pretending that all providers are interchangeable. The application should know whether it is serving primary data, fallback data or the last known good value.",
+          ],
+        },
+        {
+          title: "Scheduled pipelines need coordination too",
+          paragraphs: [
+            "Retries, circuit breakers and freshness checks do not prevent two application instances from starting the same scheduled job simultaneously. That is a separate coordination problem.",
+            "For Vienor I use PostgreSQL advisory locks to make scheduled work non-blockingly single-owner across instances. The lock protects concurrent execution, while the pipeline-level controls handle external failures and duplicate effects.",
+          ],
+        },
+        {
+          title: "Observe the boundary, not just the final error",
+          paragraphs: [
+            "A single error count does not explain why an integration is unhealthy. Useful signals include request latency, timeout rate, response status, retry count, circuit state, provider freshness, skipped duplicate work and how often fallback data is used.",
+            "Those signals make it possible to distinguish an application regression from an upstream incident and to tune retry or freshness policies based on real production behavior instead of guesses.",
+          ],
+        },
+        {
+          title: "The design principle",
+          paragraphs: [
+            "An external API should be treated as a source of uncertain data and uncertain availability, not as a local function call. The integration layer owns that uncertainty.",
+            "Bound the calls, retry selectively, stop calling when failure is already known, reuse fresh results, make writes idempotent and keep provider-specific details out of the rest of the system. That turns an API integration from a fragile dependency into a controlled boundary.",
+          ],
+        },
+      ],
+      relatedCaseStudyLabel: "See how these reliability controls are used in the Vienor weather pipeline",
+    },
+    es: {
+      title: "Cómo Construir Pipelines Confiables sobre APIs de Terceros",
+      description:
+        "Cómo diseñar pipelines resilientes sobre APIs externas con timeouts, reintentos, políticas de vigencia, circuit breakers, deduplicación, fallbacks y persistencia idempotente.",
+      eyebrow: "Backend · APIs · Confiabilidad",
+      intro:
+        "Las APIs de terceros forman parte de tu sistema aunque no las controles. Pueden volverse lentas, aplicar rate limits, entregar datos viejos o dejar de responder. Una integración confiable no es solamente un request HTTP que casi siempre funciona: es un límite que absorbe fallas externas sin propagarlas al resto de la aplicación.",
+      dateLabel: "16 de octubre de 2026",
+      sections: [
+        {
+          title: "Tratar al proveedor como una dependencia no confiable",
+          paragraphs: [
+            "La primera suposición útil es que toda API externa eventualmente va a fallar de una forma que el happy path no contemplaba. Eso no significa que el proveedor sea malo. Fallan las redes, se agotan cuotas, hay mantenimiento y cambian los tiempos de respuesta.",
+            "El límite de integración debería definir qué ocurre cuando el proveedor está lento, no disponible, devuelve datos parcialmente incorrectos o aplica un rate limit temporal. La confiabilidad empieza cuando esos casos son explícitos y no simples excepciones genéricas.",
+          ],
+        },
+        {
+          title: "Separar adaptadores de proveedor del comportamiento de la aplicación",
+          paragraphs: [
+            "El código de negocio no debería conocer el formato de respuesta, las particularidades de autenticación o el vocabulario de errores de cada servicio externo. Prefiero un adaptador por proveedor que traduzca cada API a un contrato interno.",
+            "Eso permite cambiar proveedores, combinar varias fuentes o desactivar una temporalmente sin reescribir el resto de la aplicación. La evaluación de pronósticos, alertas y persistencia puede trabajar con un modelo normalizado mientras lo específico de cada proveedor queda en el borde.",
+          ],
+          code: `interface WeatherProvider {
+  getForecast(input: ForecastRequest): Promise<NormalizedForecast>;
+}`,
+        },
+        {
+          title: "Usar timeouts antes de pensar en reintentos",
+          paragraphs: [
+            "Un request que no falla pero tarda demasiado puede ser más dañino que un error rápido. Toda llamada externa debería tener un tiempo máximo durante el cual puede ocupar un worker o un slot de un job programado.",
+            "Los reintentos sólo tienen sentido cuando el primer intento tiene un timeout claro. De lo contrario, varias llamadas lentas pueden superponerse y amplificar el problema original.",
+          ],
+          code: `const controller = new AbortController();
+const timeout = setTimeout(() => controller.abort(), 8_000);
+
+try {
+  return await fetch(url, { signal: controller.signal });
+} finally {
+  clearTimeout(timeout);
+}`,
+        },
+        {
+          title: "Reintentar sólo fallas que pueden mejorar con el tiempo",
+          paragraphs: [
+            "No todos los errores merecen un retry. Una falla temporal de red o una respuesta 5xx puede funcionar en un intento posterior. Credenciales inválidas, input incorrecto o una cuota agotada normalmente no.",
+            "Los reintentos deben ser limitados y espaciados, preferentemente con exponential backoff y jitter para evitar que varias instancias vuelvan a intentar exactamente al mismo tiempo. El objetivo es recuperarse, no insistir a cualquier costo.",
+          ],
+          code: `delay = min(base * 2 ** attempt + jitter, maxDelay)`,
+        },
+        {
+          title: "Los circuit breakers detienen fallas repetidas",
+          paragraphs: [
+            "Cuando un proveedor ya está fallando o limitando tráfico, llamarlo nuevamente en cada ejecución programada genera más carga y desperdicia capacidad. Un circuit breaker registra que las fallas recientes superaron un umbral y detiene temporalmente nuevos intentos.",
+            "El tiempo de apertura debería reflejar el tipo de falla. Un cooldown corto puede alcanzar para respuestas 429 transitorias, mientras que un error explícito de cuota diaria puede justificar mantener el circuito abierto mucho más tiempo. Después del cooldown, una prueba limitada puede decidir si vuelve el tráfico normal.",
+          ],
+          code: `CLOSED -> demasiadas fallas -> OPEN
+OPEN -> termina cooldown -> HALF_OPEN
+HALF_OPEN -> éxito -> CLOSED
+HALF_OPEN -> falla -> OPEN`,
+        },
+        {
+          title: "La vigencia puede valer más que un request nuevo",
+          paragraphs: [
+            "Un pipeline confiable debería saber qué tan viejos son sus datos actuales antes de volver a consultar un proveedor. Si un pronóstico todavía es suficientemente reciente para el comportamiento del producto, reutilizarlo puede ser mejor que hacer otro request externo.",
+            "La vigencia es una decisión de producto, no solamente un TTL de cache. Distintos consumidores pueden tolerar edades diferentes: un pronóstico interactivo, la evaluación de alertas y un resumen diario pueden tener ventanas distintas.",
+          ],
+        },
+        {
+          title: "Reutilizar una respuesta entre varios consumidores",
+          paragraphs: [
+            "Los requests duplicados suelen aparecer porque distintas partes de la aplicación piden de forma independiente los mismos datos. Un refresh programado puede consultar un proveedor y minutos después un proceso de alertas o comparación vuelve a pedir exactamente lo mismo.",
+            "Cuando sea posible, conviene consultar una vez, normalizar una vez y persistir o compartir el resultado para que pronósticos, comparaciones, alertas y resúmenes reutilicen el mismo snapshot. Eso reduce consumo de cuota y hace que esas funciones razonen sobre los mismos datos.",
+          ],
+        },
+        {
+          title: "Hacer idempotente la persistencia",
+          paragraphs: [
+            "Los reintentos y las invocaciones duplicadas son inevitables en alguna capa, por lo que escribir dos veces el mismo resultado debería ser seguro. La idempotencia puede lograrse con claves únicas, upserts, tokens de deduplicación o comparando el snapshot normalizado nuevo con el actual antes de escribir.",
+            "En pipelines de datos prefiero no generar un nuevo evento o snapshot cuando nada relevante cambió. Eso reduce crecimiento de la base y hace más fácil interpretar la actividad posterior.",
+          ],
+          code: `if (sameMeaningfulData(previous, incoming)) {
+  return previous;
+}
+
+return persist(incoming);`,
+        },
+        {
+          title: "Los fallbacks necesitan semántica explícita",
+          paragraphs: [
+            "Tener varios proveedores puede mejorar la disponibilidad, pero sólo si el sistema sabe qué significa usar un fallback. El proveedor B puede tener otra resolución, frecuencia de actualización o conjunto de campos que el proveedor A.",
+            "Hay que normalizar lo que realmente es comparable, conservar metadata de la fuente y evitar fingir que todos los proveedores son intercambiables. La aplicación debería saber si está sirviendo datos primarios, datos de fallback o el último valor válido conocido.",
+          ],
+        },
+        {
+          title: "Los pipelines programados también necesitan coordinación",
+          paragraphs: [
+            "Los reintentos, circuit breakers y controles de vigencia no impiden que dos instancias de la aplicación comiencen el mismo job programado al mismo tiempo. Ese es otro problema de coordinación.",
+            "En Vienor uso advisory locks de PostgreSQL para que el trabajo programado tenga un único dueño entre instancias sin bloquear. El lock protege la ejecución concurrente, mientras que los controles del pipeline manejan fallas externas y efectos duplicados.",
+          ],
+        },
+        {
+          title: "Observar el límite, no sólo el error final",
+          paragraphs: [
+            "Un contador de errores no explica por qué una integración está degradada. Señales útiles son latencia, tasa de timeouts, status HTTP, cantidad de reintentos, estado del circuito, vigencia de datos, trabajo duplicado evitado y frecuencia de uso de fallbacks.",
+            "Esas métricas permiten distinguir una regresión propia de un incidente del proveedor y ajustar políticas de retry o vigencia usando comportamiento real de producción en lugar de suposiciones.",
+          ],
+        },
+        {
+          title: "El principio de diseño",
+          paragraphs: [
+            "Una API externa debe tratarse como una fuente de datos y disponibilidad inciertos, no como una función local. La capa de integración es la responsable de absorber esa incertidumbre.",
+            "Limitá la duración de las llamadas, reintentá selectivamente, dejá de llamar cuando la falla ya es conocida, reutilizá resultados vigentes, hacé idempotentes las escrituras y mantené los detalles de cada proveedor fuera del resto del sistema. Así una integración deja de ser una dependencia frágil y pasa a ser un límite controlado.",
+          ],
+        },
+      ],
+      relatedCaseStudyLabel: "Ver cómo se usan estos controles de confiabilidad en el pipeline meteorológico de Vienor",
+    },
+  },
 ];
 
 export const getTechnicalArticle = (slug: string): TechnicalArticle | undefined =>
