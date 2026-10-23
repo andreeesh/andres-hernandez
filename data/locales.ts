@@ -23,11 +23,11 @@ export function languageLinks(pagePath: string, locale: Locale): string {
 
 export const profileEs = {
   title: "Ingeniero de Software Senior",
-  eyebrow: "Ingeniero de Software Senior · Backend e infraestructura · Córdoba, Argentina",
-  headline: "Desarrollo y opero software en producción.",
-  intro: "Soy ingeniero de software senior y tengo más de 15 años de experiencia desarrollando sistemas backend, aplicaciones web, APIs, integraciones e infraestructura de producción para equipos internacionales.",
+  eyebrow: "Ingeniero de Software Senior · AI, Backend y Product Engineering · Córdoba, Argentina",
+  headline: "Desarrollo software en producción con AI integrada en mi flujo de ingeniería.",
+  intro: "Soy ingeniero de software senior con más de 15 años de experiencia desarrollando y operando productos SaaS, sistemas backend, APIs, integraciones e infraestructura de producción para equipos internacionales.",
   location: "Córdoba, Argentina · Remoto · Equipos de Estados Unidos e internacionales",
-  summary: "Ingeniero de software senior con más de 15 años de experiencia desarrollando y manteniendo sistemas en producción para equipos internacionales. Fuerte experiencia en PHP y WordPress, con trabajo práctico en backend, APIs REST, bases de datos relacionales, Node.js, TypeScript, infraestructura cloud, CI/CD, e-commerce e integraciones con servicios de terceros. Acostumbrado a tomar sistemas desconocidos o heredados, resolver incidentes de producción y entregar software de punta a punta.",
+  summary: "Ingeniero de software senior con más de 15 años de experiencia desarrollando y operando software en producción para equipos internacionales. Trabajo de forma práctica con productos SaaS, backend, APIs REST, bases de datos relacionales, TypeScript, Node.js, PHP, infraestructura cloud y CI/CD, integrando agentes de AI, MCP y flujos con LLMs a lo largo del ciclo de ingeniería. Acostumbrado a tomar sistemas desconocidos o heredados, resolver incidentes de producción y entregar software de punta a punta.",
 } as const;
 
 export const experienceEs = [
@@ -62,6 +62,9 @@ export const earlierExperienceEs = { title: "Experiencia anterior", dates: "2010
 export const educationEs = ["Desarrollo Web — Image Campus, 2011", "Redes y servidores Linux — IT Education, 2015"] as const;
 
 export const skillNamesEs: Record<string, string> = {
+  "AI & agentic engineering": "AI e ingeniería con agentes",
+  "Data & systems": "Datos y sistemas",
+  "Frontend & product": "Frontend y producto",
   "Backend & APIs": "Backend y APIs",
   "Data": "Datos",
   "Infrastructure & delivery": "Infraestructura y despliegue",
@@ -71,6 +74,9 @@ export const skillNamesEs: Record<string, string> = {
 };
 
 export const skillLeadEs: Record<string, string> = {
+  "AI & agentic engineering": "Codex · Cursor · MCP · Integraciones con LLMs · Flujos con agentes · Tool calling · Diseño de prompts/sistemas · AI-assisted SDLC",
+  "Data & systems": "PostgreSQL · MySQL · Modelado relacional · Validación de datos · ETL · Pipelines de importación y exportación · Migraciones a gran escala · Supabase",
+  "Frontend & product": "React · Next.js · HTML5 · CSS3 · Desarrollo responsive · Prismic · Contentful · SEO técnico · Marcado Schema",
   "Backend & APIs": "PHP · Node.js · TypeScript · JavaScript · APIs REST · Webhooks · Autenticación · Integraciones con terceros · Procesos en segundo plano · Laravel · Yii",
   "Data": "PostgreSQL · MySQL · Modelado relacional · Validación de datos · ETL · Pipelines de importación y exportación · Migraciones a gran escala · Supabase",
   "Infrastructure & delivery": "Linux · Docker · Git · GitHub Actions · CI/CD · Cloudflare · Cloudflare Workers · Vercel · Render · DigitalOcean · Resolución de problemas en producción",
