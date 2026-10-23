@@ -5,8 +5,8 @@ import { socialImage } from "@/data/seo";
 import "../globals.css";
 
 const font = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], display: "swap" });
-const title = "Andrés Hernández — Senior Software Engineer | Backend & Infrastructure";
-const description = "Senior Software Engineer with 15+ years of experience building production systems, backend services, APIs, integrations and web platforms for international teams.";
+const title = "Andrés Hernández — Senior Software Engineer | AI, Backend & SaaS";
+const description = "Senior Software Engineer with 15+ years of experience building SaaS products, backend systems, APIs and AI-powered engineering workflows with TypeScript, Node.js, PostgreSQL, MCP and modern coding agents.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.productionUrl),
