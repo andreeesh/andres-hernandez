@@ -15,7 +15,7 @@ export const profile = {
   linkedin: "https://linkedin.com/in/andreeesh",
   productionUrl: "https://andreshernandez.ar",
   summary:
-    "Senior Software Engineer with 15+ years of experience building and operating production software for international teams. Hands-on across SaaS products, backend systems, REST APIs, relational databases, TypeScript, Node.js, PHP, cloud infrastructure and CI/CD, with AI coding agents, MCP integrations and LLM-powered workflows embedded throughout the engineering lifecycle. Experienced owning unfamiliar and legacy systems, troubleshooting production incidents, designing integrations and delivering software end to end.",
+    "Senior Software Engineer with 15+ years of experience building and operating production systems for international teams. Current work spans AI and agentic engineering, MCP servers, multi-tenant SaaS, backend APIs, relational data and production infrastructure across TypeScript, Node.js, PostgreSQL and PHP. I use coding agents throughout the software lifecycle while retaining ownership of architecture, testing, security and delivery. Strong background in third-party integrations, unfamiliar and legacy systems, and production incident response.",
 } as const;
 
 export const navigation: Link[] = [
