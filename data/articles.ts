@@ -23,11 +23,13 @@ export type TechnicalArticle = {
     href: string;
     label: string;
   };
+  relatedArticleSlugs: string[];
 };
 
 export const technicalArticles: TechnicalArticle[] = [
   {
     slug: "postgresql-advisory-locks-scheduled-jobs",
+    relatedArticleSlugs: ["reliable-third-party-api-pipelines","multi-tenant-rbac-saas"],
     publishedAt: "2026-10-16",
     relatedCaseStudy: {
       href: "/work/vienor-saas-platform",
@@ -202,6 +204,7 @@ try {
   },
   {
     slug: "multi-tenant-rbac-saas",
+    relatedArticleSlugs: ["reliable-third-party-api-pipelines","postgresql-advisory-locks-scheduled-jobs"],
     publishedAt: "2026-10-08",
     relatedCaseStudy: {
       href: "/work/vienor-saas-platform",
@@ -440,6 +443,7 @@ queryKey: ["analytics", tenantId]`,
   },
   {
     slug: "reliable-third-party-api-pipelines",
+    relatedArticleSlugs: ["postgresql-advisory-locks-scheduled-jobs","multi-tenant-rbac-saas"],
     publishedAt: "2026-09-29",
     relatedCaseStudy: {
       href: "/work/vienor-saas-platform",
@@ -682,6 +686,7 @@ return persist(incoming);`,
   },
   {
     slug: "taking-ownership-unfamiliar-production-codebase",
+    relatedArticleSlugs: ["reliable-third-party-api-pipelines"],
     publishedAt: "2026-09-21",
     relatedCaseStudy: {
       href: "/#cbd-pros-usa",
@@ -898,6 +903,7 @@ deploy
   },
   {
     slug: "production-mcp-server-oauth-tool-boundaries",
+    relatedArticleSlugs: ["reliable-third-party-api-pipelines","multi-tenant-rbac-saas"],
     publishedAt: "2026-09-13",
     relatedCaseStudy: {
       href: "/work/search-console-insights-mcp",
