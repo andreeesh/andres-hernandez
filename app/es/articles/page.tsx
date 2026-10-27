@@ -5,8 +5,8 @@ import { createPageMetadata } from "@/data/seo";
 
 export const dynamic = "force-static";
 export const metadata = createPageMetadata({
-  title: "Artículos Técnicos — Backend, Infraestructura y Sistemas en Producción",
-  description: "Artículos técnicos de Andrés Hernández sobre arquitectura backend, PostgreSQL, SaaS multiempresa, APIs de terceros, confiabilidad y sistemas en producción.",
+  title: "Artículos Técnicos — AI, MCP, Backend y Sistemas en Producción",
+  description: "Artículos técnicos de Andrés Hernández sobre ingeniería de AI, servidores MCP, arquitectura backend, PostgreSQL, SaaS multiempresa, APIs, confiabilidad y sistemas en producción.",
   path: "/es/articles",
   locale: "es-AR",
   englishPath: "/articles",
