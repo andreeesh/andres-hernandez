@@ -9,8 +9,8 @@ export function TechnicalWriting({ locale = "en", standalone = false }: { locale
   return <section id={standalone ? undefined : "articles"} className="section" aria-labelledby="articles-title">
     <div className="section-heading">
       <p className="section-label">{es ? "Artículos técnicos" : "Technical writing"}</p>
-      <h2 id="articles-title">{es ? "Backend, infraestructura y sistemas en producción." : "Backend, infrastructure and production systems."}</h2>
-      <p>{es ? "Notas basadas en problemas reales de arquitectura, integraciones, confiabilidad y operación de software." : "Notes based on real architecture, integration, reliability and software operations problems."}</p>
+      <h2 id="articles-title">{es ? "AI, MCP, backend y sistemas en producción." : "AI, MCP, backend and production systems."}</h2>
+      <p>{es ? "Notas basadas en problemas reales de tooling de AI, arquitectura, integraciones, confiabilidad y operación de software." : "Notes based on real AI tooling, architecture, integration, reliability and software operations problems."}</p>
     </div>
     <div className="projects-list">
       {articles.map((article) => {
