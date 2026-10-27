@@ -26,8 +26,9 @@ export const profileEs = {
   eyebrow: "Ingeniero de Software Senior · AI, Backend y Product Engineering · Córdoba, Argentina",
   headline: "Desarrollo software en producción con AI integrada en mi flujo de ingeniería.",
   intro: "Soy ingeniero de software senior con más de 15 años de experiencia desarrollando y operando productos SaaS, sistemas backend, APIs, integraciones e infraestructura de producción para equipos internacionales.",
+  detail: "Trabajo con TypeScript, Node.js, PHP, PostgreSQL y flujos modernos de ingeniería con AI, incluidos agentes de código, servidores MCP, integraciones con LLMs y automatización. Uso AI a lo largo del ciclo de desarrollo —arquitectura, implementación, testing, debugging, revisión de seguridad y CI/CD— manteniendo la responsabilidad sobre el software que llega a producción.",
   location: "Córdoba, Argentina · Remoto · Equipos de Estados Unidos e internacionales",
-  summary: "Ingeniero de software senior con más de 15 años de experiencia desarrollando y operando software en producción para equipos internacionales. Trabajo de forma práctica con productos SaaS, backend, APIs REST, bases de datos relacionales, TypeScript, Node.js, PHP, infraestructura cloud y CI/CD, integrando agentes de AI, MCP y flujos con LLMs a lo largo del ciclo de ingeniería. Acostumbrado a tomar sistemas desconocidos o heredados, resolver incidentes de producción y entregar software de punta a punta.",
+  summary: "Ingeniero de software senior con más de 15 años de experiencia desarrollando y operando sistemas en producción para equipos internacionales. Mi trabajo actual abarca ingeniería con AI y agentes, servidores MCP, SaaS multiempresa, APIs backend, datos relacionales e infraestructura de producción con TypeScript, Node.js, PostgreSQL y PHP. Uso agentes de código a lo largo del ciclo de software manteniendo ownership sobre arquitectura, testing, seguridad y entrega. Tengo experiencia sólida en integraciones con terceros, sistemas desconocidos o legacy y respuesta a incidentes de producción.",
 } as const;
 
 export const experienceEs = [
