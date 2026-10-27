@@ -896,6 +896,183 @@ deploy
       relatedCaseStudyLabel: "Ver el trabajo de handoff de plataforma en CBD Pros USA",
     },
   },
+  {
+    slug: "production-mcp-server-oauth-tool-boundaries",
+    publishedAt: "2026-09-13",
+    relatedCaseStudy: {
+      href: "/work/search-console-insights-mcp",
+      label: "Search Console Insights — MCP server",
+    },
+    en: {
+      title: "Building a Production MCP Server: OAuth, Tool Boundaries and State",
+      description:
+        "What changes when an MCP server moves beyond a local demo: OAuth, constrained tool contracts, identity isolation, bounded queries, persistence and production failure boundaries.",
+      eyebrow: "AI Engineering · MCP · Backend",
+      intro:
+        "A local MCP demo can be little more than a transport plus a few functions. A production MCP service is a different system: it has identities, credentials, authorization boundaries, persistent state, upstream APIs and failure modes that an AI client can trigger repeatedly. The protocol is only one layer of the design.",
+      dateLabel: "September 13, 2026",
+      sections: [
+        {
+          title: "Treat the MCP server as an application boundary",
+          paragraphs: [
+            "The easiest way to build an MCP integration is to expose an existing API almost directly. That is also an easy way to give an AI client more authority than it needs. In production, I prefer to treat the MCP server as its own application boundary with an intentionally small contract.",
+            "For Search Console Insights, the useful operations are specific: discover connected properties, query search performance, compare periods, inspect URL indexing and read sitemap status. The server exposes those workflows instead of becoming a generic proxy for every Google API operation.",
+          ],
+        },
+        {
+          title: "Design tools around user intent, not upstream endpoints",
+          paragraphs: [
+            "A good tool should represent a task the assistant can reason about. That usually means fewer parameters, narrower result shapes and stronger defaults than the upstream API provides.",
+            "For example, a search-performance tool can constrain dimensions, date ranges and row counts. The model still has enough flexibility to analyze traffic, but it cannot accidentally request unbounded data or invoke unrelated Search Console operations.",
+          ],
+          code: `const SearchPerformanceInput = z.object({
+  siteUrl: z.string().min(1),
+  startDate: z.string(),
+  endDate: z.string(),
+  dimensions: z.array(
+    z.enum(["date", "query", "page", "country", "device"])
+  ).max(3),
+  rowLimit: z.number().int().min(1).max(25000),
+});`,
+        },
+        {
+          title: "OAuth is part of the architecture, not a login screen",
+          paragraphs: [
+            "A remote MCP service needs to know which user is calling it and which upstream account that identity is allowed to use. That makes OAuth part of the service architecture rather than a thin authentication step in front of the tools.",
+            "In this project the MCP client authenticates to the service, while Google refresh tokens remain server-side. The client receives the capabilities exposed by the MCP server, not the upstream Google credentials themselves. That separation reduces credential exposure and gives the service a stable place to enforce authorization.",
+          ],
+        },
+        {
+          title: "Separate external data from workflow state",
+          paragraphs: [
+            "Not every piece of data that passes through an MCP server belongs in its database. Search Console performance data can be read from Google and cached briefly without becoming application-owned data.",
+            "Persistent storage is more appropriate for state the user creates inside the workflow: planned SEO actions, implementation notes and change history. Keeping those categories separate reduces unnecessary data retention and makes it clearer which system is authoritative for each record.",
+          ],
+        },
+        {
+          title: "Isolation needs more than a user ID",
+          paragraphs: [
+            "Once persistent state exists, every record needs an explicit ownership boundary. In Search Console Insights, workflow records are isolated by the authenticated Google subject and the Search Console property they belong to.",
+            "That matters because one person can access multiple properties, and the service can support multiple connected identities. Authorization therefore needs to answer both who is making the request and which property the requested state belongs to.",
+          ],
+        },
+        {
+          title: "Bound the operations an agent can repeat",
+          paragraphs: [
+            "AI clients are excellent at composing tools, but they can also retry, broaden a query or call the same operation many times while exploring a problem. Production tools should assume that behavior is normal.",
+            "I put explicit bounds around date ranges, result sizes and supported dimensions, validate every input and avoid arbitrary outbound URL fetching. These are not model-specific restrictions; they are ordinary backend controls applied to a client that happens to be an AI system.",
+          ],
+        },
+        {
+          title: "Failure behavior is part of the tool contract",
+          paragraphs: [
+            "An MCP tool should fail in a way the client can understand without exposing secrets or implementation details. Upstream API errors, expired authorization and database failures need useful boundaries, but raw credentials, connection strings and internal stack information should stay on the server.",
+            "This also improves agent behavior. A clear, bounded error gives the assistant enough information to choose another action. An opaque crash encourages retries, while an overly detailed infrastructure error can leak information the client never needed.",
+          ],
+        },
+        {
+          title: "Test the protocol and the application separately",
+          paragraphs: [
+            "There are at least two things to verify: the backend logic behind each operation and the MCP transport that exposes it. Type checking and unit tests cover input validation and service behavior, while protocol smoke tests verify that a real MCP client can initialize the server, discover tools and call them successfully.",
+            "That separation makes debugging much faster. If the service logic passes but tool discovery fails, the problem is in the protocol layer. If transport works but a Search Console query fails, the investigation moves to authentication, validation or the upstream API.",
+          ],
+        },
+        {
+          title: "Production MCP is backend engineering with a new client",
+          paragraphs: [
+            "The interesting part of an MCP server is not the novelty of tool calling. The difficult parts are familiar backend concerns: authentication, authorization, contracts, rate and size limits, state ownership, persistence, observability and safe failure behavior.",
+            "The AI client changes how those capabilities are discovered and composed, but it does not remove the need for disciplined service design. My rule is simple: give the agent useful powers, then make the boundaries around those powers explicit enough that the system remains understandable when it is running unattended.",
+          ],
+        },
+      ],
+      relatedCaseStudyLabel: "See the production architecture behind Search Console Insights",
+    },
+    es: {
+      title: "Cómo Construir un Servidor MCP de Producción: OAuth, Límites de Tools y Estado",
+      description:
+        "Qué cambia cuando un servidor MCP deja de ser una demo local: OAuth, contratos de tools acotados, aislamiento de identidades, consultas limitadas, persistencia y fronteras de falla.",
+      eyebrow: "Ingeniería de AI · MCP · Backend",
+      intro:
+        "Una demo local de MCP puede ser poco más que un transporte y algunas funciones. Un servicio MCP de producción es otro tipo de sistema: tiene identidades, credenciales, límites de autorización, estado persistente, APIs externas y modos de falla que un cliente de AI puede disparar repetidamente. El protocolo es sólo una capa del diseño.",
+      dateLabel: "13 de septiembre de 2026",
+      sections: [
+        {
+          title: "Tratar al servidor MCP como un límite de aplicación",
+          paragraphs: [
+            "La forma más fácil de construir una integración MCP es exponer una API existente casi directamente. También es una forma fácil de darle a un cliente de AI más autoridad de la que necesita. En producción prefiero tratar al servidor MCP como un límite de aplicación propio, con un contrato deliberadamente pequeño.",
+            "En Search Console Insights las operaciones útiles son específicas: descubrir propiedades conectadas, consultar rendimiento de búsqueda, comparar períodos, inspeccionar indexación de URLs y leer el estado de sitemaps. El servidor expone esos flujos en lugar de convertirse en un proxy genérico para cualquier operación de Google.",
+          ],
+        },
+        {
+          title: "Diseñar tools alrededor de la intención, no de los endpoints externos",
+          paragraphs: [
+            "Una buena tool debería representar una tarea sobre la que el asistente pueda razonar. Normalmente eso significa menos parámetros, resultados más acotados y defaults más fuertes que los que ofrece la API externa.",
+            "Por ejemplo, una tool de rendimiento puede limitar dimensiones, rangos de fechas y cantidad de filas. El modelo conserva suficiente flexibilidad para analizar tráfico, pero no puede pedir datos sin límite ni invocar operaciones de Search Console que no forman parte del producto.",
+          ],
+          code: `const SearchPerformanceInput = z.object({
+  siteUrl: z.string().min(1),
+  startDate: z.string(),
+  endDate: z.string(),
+  dimensions: z.array(
+    z.enum(["date", "query", "page", "country", "device"])
+  ).max(3),
+  rowLimit: z.number().int().min(1).max(25000),
+});`,
+        },
+        {
+          title: "OAuth es parte de la arquitectura, no una pantalla de login",
+          paragraphs: [
+            "Un servicio MCP remoto necesita saber quién lo está llamando y qué cuenta externa puede usar esa identidad. Eso convierte a OAuth en parte de la arquitectura del servicio, no en una capa superficial de autenticación delante de las tools.",
+            "En este proyecto el cliente MCP se autentica contra el servicio mientras los refresh tokens de Google permanecen del lado del servidor. El cliente recibe las capacidades que expone MCP, no las credenciales de Google. Esa separación reduce exposición y crea un lugar estable para aplicar autorización.",
+          ],
+        },
+        {
+          title: "Separar datos externos del estado del workflow",
+          paragraphs: [
+            "No todo dato que pasa por un servidor MCP debería terminar en su base. Los datos de rendimiento de Search Console pueden leerse desde Google y cachearse brevemente sin convertirse en datos propios de la aplicación.",
+            "La persistencia tiene más sentido para el estado que el usuario crea dentro del flujo: acciones SEO planificadas, notas de implementación e historial de cambios. Separar esas categorías reduce retención innecesaria y deja claro qué sistema es autoritativo para cada registro.",
+          ],
+        },
+        {
+          title: "El aislamiento necesita algo más que un user ID",
+          paragraphs: [
+            "Cuando existe estado persistente, cada registro necesita un límite de ownership explícito. En Search Console Insights, los registros del workflow quedan aislados por el subject autenticado de Google y por la propiedad de Search Console a la que pertenecen.",
+            "Esto importa porque una persona puede acceder a varias propiedades y el servicio puede soportar múltiples identidades conectadas. La autorización tiene que responder tanto quién hace el request como a qué propiedad pertenece el estado solicitado.",
+          ],
+        },
+        {
+          title: "Limitar las operaciones que un agente puede repetir",
+          paragraphs: [
+            "Los clientes de AI son muy buenos componiendo tools, pero también pueden reintentar, ampliar una consulta o repetir una operación muchas veces mientras exploran un problema. Las tools de producción deberían asumir que ese comportamiento es normal.",
+            "Por eso establezco límites explícitos sobre rangos de fechas, tamaños de resultados y dimensiones soportadas, valido cada input y evito fetch arbitrario de URLs externas. No son restricciones especiales para modelos; son controles normales de backend aplicados a un cliente que en este caso es un sistema de AI.",
+          ],
+        },
+        {
+          title: "El comportamiento ante fallas es parte del contrato",
+          paragraphs: [
+            "Una tool MCP debería fallar de una forma que el cliente pueda entender sin exponer secretos ni detalles internos. Los errores de APIs externas, autorizaciones vencidas y fallas de base necesitan límites útiles, mientras que credenciales, strings de conexión y stacks internos deben quedar en el servidor.",
+            "Esto también mejora el comportamiento del agente. Un error claro y acotado le da información suficiente para elegir otra acción. Un crash opaco incentiva reintentos; un error de infraestructura demasiado detallado puede filtrar información que el cliente nunca necesitó.",
+          ],
+        },
+        {
+          title: "Probar por separado el protocolo y la aplicación",
+          paragraphs: [
+            "Hay al menos dos cosas distintas para verificar: la lógica de backend detrás de cada operación y el transporte MCP que la expone. Type checking y tests unitarios cubren validación y comportamiento del servicio; los smoke tests del protocolo verifican que un cliente MCP real pueda inicializar el servidor, descubrir tools e invocarlas.",
+            "Esa separación acelera mucho el diagnóstico. Si la lógica del servicio pasa pero falla el descubrimiento de tools, el problema está en la capa de protocolo. Si el transporte funciona pero falla una consulta de Search Console, la investigación pasa a autenticación, validación o la API externa.",
+          ],
+        },
+        {
+          title: "MCP en producción es backend engineering con un cliente nuevo",
+          paragraphs: [
+            "La parte interesante de un servidor MCP no es la novedad del tool calling. Las partes difíciles son problemas conocidos de backend: autenticación, autorización, contratos, límites de uso y tamaño, ownership del estado, persistencia, observabilidad y fallas seguras.",
+            "El cliente de AI cambia cómo se descubren y combinan esas capacidades, pero no elimina la necesidad de diseñar el servicio con disciplina. Mi regla es simple: darle al agente capacidades útiles y hacer los límites alrededor de esas capacidades suficientemente explícitos para que el sistema siga siendo entendible cuando opera sin supervisión constante.",
+          ],
+        },
+      ],
+      relatedCaseStudyLabel: "Ver la arquitectura de producción detrás de Search Console Insights",
+    },
+  },
+
 ];
 
 export const getTechnicalArticle = (slug: string): TechnicalArticle | undefined =>
