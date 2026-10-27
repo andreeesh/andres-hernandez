@@ -1,9 +1,10 @@
-import type { TechnicalArticle } from "@/data/articles";
+import { technicalArticles, type TechnicalArticle } from "@/data/articles";
 import { profile } from "@/data/profile";
 
 export function TechnicalArticlePage({ article, locale = "en" }: { article: TechnicalArticle; locale?: "en" | "es" }) {
   const content = locale === "es" ? article.es : article.en;
   const relatedHref = locale === "es" ? `/es${article.relatedCaseStudy.href}` : article.relatedCaseStudy.href;
+  const relatedArticles = technicalArticles.filter((candidate) => candidate.slug !== article.slug);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -30,6 +31,14 @@ export function TechnicalArticlePage({ article, locale = "en" }: { article: Tech
     <section className="case-study-section">
       <h2>{locale === "es" ? "Trabajo relacionado" : "Related work"}</h2>
       <p><a href={relatedHref}>{content.relatedCaseStudyLabel}</a></p>
+      <h3>{locale === "es" ? "Artículos técnicos relacionados" : "Related technical articles"}</h3>
+      <ul>
+        {relatedArticles.map((candidate) => {
+          const candidateContent = locale === "es" ? candidate.es : candidate.en;
+          const href = `${locale === "es" ? "/es" : ""}/articles/${candidate.slug}`;
+          return <li key={candidate.slug}><a href={href}>{candidateContent.title}</a></li>;
+        })}
+      </ul>
     </section>
   </article>;
 }
