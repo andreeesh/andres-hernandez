@@ -13,6 +13,28 @@ import { createPageMetadata } from "@/data/seo";
 export const metadata = createPageMetadata({ title: "Andrés Hernández — Ingeniero de Software Senior | AI, Backend y SaaS", description: "Ingeniero de software senior con más de 15 años de experiencia desarrollando productos SaaS, backend, APIs y flujos de ingeniería con AI, TypeScript, Node.js, PostgreSQL, MCP y agentes de código.", path: "/es", locale: "es-AR", englishPath: "/" });
 
 export default function SpanishHome() {
-  const jsonLd = { "@context": "https://schema.org", "@type": "Person", name: profile.name, url: `${profile.productionUrl}/es`, jobTitle: "Ingeniero de Software Senior", email: profile.emailHref, sameAs: [profile.linkedin], knowsAbout: ["Ingeniería de software asistida por AI", "Agentes de AI", "MCP", "Integraciones con LLMs", "Backend", "Node.js", "TypeScript", "REST APIs", "PostgreSQL", "Docker", "CI/CD", "Infraestructura cloud", "PHP", "WordPress"] };
+  const personId = `${profile.productionUrl}/#person`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": `${profile.productionUrl}/es#profile-page`,
+        url: `${profile.productionUrl}/es`,
+        name: `${profile.name} — Ingeniero de Software Senior`,
+        mainEntity: { "@id": personId },
+        inLanguage: "es-AR",
+      },
+      {
+        "@type": "Person",
+        "@id": personId,
+        name: profile.name,
+        url: profile.productionUrl,
+        jobTitle: "Senior Software Engineer",
+        sameAs: [profile.linkedin],
+        knowsAbout: ["Ingeniería de software asistida por AI", "Agentes de AI", "MCP", "Integraciones con LLMs", "Backend", "Node.js", "TypeScript", "REST APIs", "PostgreSQL", "Docker", "CI/CD", "Infraestructura cloud", "PHP", "WordPress"],
+      },
+    ],
+  };
   return <><a className="skip-link" href="#main-content">Ir al contenido</a><Header locale="es-AR" /><main id="main-content" className="container"><Intro locale="es-AR" /><EngineeringFocus locale="es-AR" /><ExperienceSection locale="es-AR" /><SelectedWork locale="es-AR" /><TechnicalWriting locale="es-AR" /><Skills locale="es-AR" /><Contact locale="es-AR" /></main><Footer locale="es-AR" /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /></>;
 }
