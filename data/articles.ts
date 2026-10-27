@@ -202,7 +202,7 @@ try {
   },
   {
     slug: "multi-tenant-rbac-saas",
-    publishedAt: "2026-10-16",
+    publishedAt: "2026-10-08",
     relatedCaseStudy: {
       href: "/work/vienor-saas-platform",
       label: "Vienor — multi-tenant weather SaaS",
@@ -214,7 +214,7 @@ try {
       eyebrow: "Backend · SaaS · Authorization",
       intro:
         "Multi-tenant authorization becomes much easier to reason about when identity, company membership, role and active tenant are treated as separate concepts. The mistake is usually not in the role names; it is in collapsing too many authorization decisions into the user record itself.",
-      dateLabel: "October 16, 2026",
+      dateLabel: "October 8, 2026",
       sections: [
         {
           title: "Start by separating identity from membership",
@@ -329,7 +329,7 @@ queryKey: ["analytics", tenantId]`,
       eyebrow: "Backend · SaaS · Autorización",
       intro:
         "La autorización multiempresa se vuelve mucho más clara cuando identidad, membresía, rol y tenant activo se tratan como conceptos separados. El problema normalmente no está en los nombres de los roles, sino en concentrar demasiadas decisiones de autorización dentro del registro de usuario.",
-      dateLabel: "16 de octubre de 2026",
+      dateLabel: "8 de octubre de 2026",
       sections: [
         {
           title: "Separar identidad de membresía",
@@ -440,7 +440,7 @@ queryKey: ["analytics", tenantId]`,
   },
   {
     slug: "reliable-third-party-api-pipelines",
-    publishedAt: "2026-10-16",
+    publishedAt: "2026-09-29",
     relatedCaseStudy: {
       href: "/work/vienor-saas-platform",
       label: "Vienor — multi-tenant weather SaaS",
@@ -452,7 +452,7 @@ queryKey: ["analytics", tenantId]`,
       eyebrow: "Backend · APIs · Reliability",
       intro:
         "Third-party APIs are part of your system whether you control them or not. They can slow down, rate-limit, return stale data or fail completely. A reliable integration is not just an HTTP request that succeeds most of the time; it is a boundary that absorbs external failure without letting it spread through the rest of the application.",
-      dateLabel: "October 16, 2026",
+      dateLabel: "September 29, 2026",
       sections: [
         {
           title: "Treat the provider as an unreliable dependency",
@@ -569,7 +569,7 @@ return persist(incoming);`,
       eyebrow: "Backend · APIs · Confiabilidad",
       intro:
         "Las APIs de terceros forman parte de tu sistema aunque no las controles. Pueden volverse lentas, aplicar rate limits, entregar datos viejos o dejar de responder. Una integración confiable no es solamente un request HTTP que casi siempre funciona: es un límite que absorbe fallas externas sin propagarlas al resto de la aplicación.",
-      dateLabel: "16 de octubre de 2026",
+      dateLabel: "29 de septiembre de 2026",
       sections: [
         {
           title: "Tratar al proveedor como una dependencia no confiable",
@@ -682,7 +682,7 @@ return persist(incoming);`,
   },
   {
     slug: "taking-ownership-unfamiliar-production-codebase",
-    publishedAt: "2026-10-16",
+    publishedAt: "2026-09-21",
     relatedCaseStudy: {
       href: "/#cbd-pros-usa",
       label: "CBD Pros USA — production platform handoff",
@@ -694,7 +694,7 @@ return persist(incoming);`,
       eyebrow: "Engineering · Production · Legacy Systems",
       intro:
         "Taking over an existing production system is different from starting a new project. The first job is not to improve the architecture. It is to understand what already exists well enough to operate it safely, recover deployability and make changes without breaking assumptions you have not discovered yet.",
-      dateLabel: "October 16, 2026",
+      dateLabel: "September 21, 2026",
       sections: [
         {
           title: "The first deliverable is a system map",
@@ -798,7 +798,7 @@ deploy
       eyebrow: "Ingeniería · Producción · Sistemas Legacy",
       intro:
         "Hacerse cargo de un sistema existente en producción es distinto de empezar un proyecto nuevo. El primer trabajo no es mejorar la arquitectura. Es entender lo que ya existe lo suficiente como para operarlo con seguridad, recuperar la capacidad de desplegar y hacer cambios sin romper supuestos que todavía no descubriste.",
-      dateLabel: "16 de octubre de 2026",
+      dateLabel: "21 de septiembre de 2026",
       sections: [
         {
           title: "El primer entregable es un mapa del sistema",
